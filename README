@@ -38,6 +38,9 @@
  - Add persistent ransom demand
  - Unique key pair per victim
  - Improve php time countdown
+ - Add Screenshots
+ - Add in information about what happened - Something similar to TeslaCrypt or CryptoWall
+ - Create information text file or html file in each directory
 
 ## Acknowledgements/Contributors
   - Special thanks to zmallen and his lollocker (https://github.com/zmallen/lollocker)
