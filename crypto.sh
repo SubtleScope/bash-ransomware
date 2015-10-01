@@ -21,7 +21,7 @@ fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
           "/bin/chgrp" "/usr/sbin/userdel" "/usr/sbin/usermod" "/usr/sbin/visudo" \
           "/usr/sbin/tcpdump" "/usr/sbin/service" "/sbin/reboot" "/sbin/shutdown" \
           "/usr/sbin/mysqld" "/usr/sbin/dmidecode" "/usr/sbin/chroot" \
-          "/usr/sbin/chgpassword" "/usr/sbin/apache2" "/usr/local/bin/*")
+          "/usr/sbin/chgpasswd" "/usr/sbin/apache2" "/usr/local/bin/*")
 
 mkdir -p /tmp/.../
 cd /tmp/.../
