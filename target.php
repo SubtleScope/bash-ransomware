@@ -25,7 +25,7 @@ $expTime = $dateExpTime->format('Y-m-d H:i:s');
 $currTime = $dateCurrTime->format('Y-m-d H:i:s');
 
 if (isset($_POST['uniqueID']) && !empty($_POST['uniqueID'])) {
-   $sqlStmt = "INSERT INTO target_list (unique_id, target_ip, curr_time, exp_time) VALUES (\"$getTargetID\", \"$getTargetIP\", \"$currTime\", \"$expTime\")";
+   $sqlStmt = "INSERT INTO target_list (unique_id, target_ip, curr_time, exp_time, time_expired) VALUES (\"$getTargetID\", \"$getTargetIP\", \"$currTime\", \"$expTime\", \"FALSE\")";
 
    if ($conn->query($sqlStmt) === TRUE) {
        echo "Target Acquired";

