@@ -1,5 +1,11 @@
 # Bash Ransomware
 
+## Requirements
+ - openssl
+ - jquery
+ - mysql
+ - php 5 (php5-mysql)
+
 ## What to do on the server-side
  - $ openssl genrsa -out priv.pem 4096
  - $ openssl rsa -pubout -in priv.pem -out pub.pem
@@ -12,7 +18,8 @@
  - $ python SimplHTTPServer 8080 &
  - $ mv dec_auth.php /var/www/html/
  - $ mv target.php /var/www/html/
- - > Modify dec_auth.php and target.php with your database information
+ - $ mv query.php /var/www/html/
+ - > Modify decrypt.php, query.php, and target.php with your database information (Plan to create one file that can be referenced in each)
  - > Next, create the database for storing the data
  - $ mysql -u [user] -p
  - $ create database victims;
@@ -36,12 +43,15 @@
  - Add in error handling for non-existing files
  - Imporve functionality and capabilities
  - Add persistent ransom demand
- - Unique key pair per victim
- - Improve php time countdown
+ - Unique key pair per victim (In work)
  - Add Screenshots
- - Add in information about what happened - Something similar to TeslaCrypt or CryptoWall
+ - Make ransom message on web page prettier 
  - Create information text file or html file in each directory
 
 ## Acknowledgements/Contributors
   - Special thanks to zmallen and his lollocker (https://github.com/zmallen/lollocker)
   - lollocker served as the inspiration for this project
+  - CryptoWall message text used came from https://www.pcrisk.com/removal-guides/7844-cryptowall-virus
+
+## WARNING 
+  - Use this tool at your own risk. Author is not responsible or liable if you damage your own system or others. Follow all local, state, federal, and international laws as it pertains to your geographic location. Do NOT use this tool maliciously as it is being released for educational purposes for use in cyber exercises or demonstrations of adversarial tools.
