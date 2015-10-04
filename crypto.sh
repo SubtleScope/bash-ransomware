@@ -77,14 +77,14 @@ done
 
 chmod 755 /etc/cron.hourly/instructions.sh
 
-getTTY=$(/usr/bin/tty)
+getTTY=$(tty)
 
 if [ "${osType}" == "redhat" ]
 then
-  /usr/bin/crontab -l | { cat; echo "5 * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab -
+  /usr/bin/crontab -l | { cat; echo "1 * * * * /etc/cron.hourly/instructions.sh > ${getTTy}"; } | /usr/bin/crontab -
 elif [ "${osType}" == "debian" ]
 then
-  /usr/bin/crontab -l | { cat; echo "5/* * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab -
+  /usr/bin/crontab -l | { cat; echo "*/1 * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab -
 else
   echo "Could not set crontab" &>/dev/null
 fi
