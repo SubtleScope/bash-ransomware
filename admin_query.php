@@ -40,7 +40,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
                   echo "</font>";
                }
             } else {
-               echo "<font color=\"green\">";
+               echo "<font color=\"#006400\">";
                echo "$row[time_left]";
                echo "</font>";
             }
