@@ -7,7 +7,7 @@
     </script>
   </head>
 
-  <body>
+  <body background="/hacker.jpg" style='background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: 100% 100%;'>
     <center>
     <table border='0'>
       <tr>
