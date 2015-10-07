@@ -31,7 +31,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
                echo "$('#what_happened').hide();" . "\n";
 
                $sql1 = "UPDATE target_list SET time_expired=\"1\" where unique_id = \"$targetID\"";
-               $result1 = $conn->query($sql);
+               $result1 = $conn->query($sql1);
 
                if ($result->num_rows > 0) {
                   echo "<center>";
