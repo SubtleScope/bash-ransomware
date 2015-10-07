@@ -98,7 +98,6 @@ if ($result->num_rows > 0) {
          echo "  });" . "\n";
          echo "</script>" . "\n";
          echo "<td id=\"test$row[id]\" align=\"center\">";
-         //echo "$row[time_left]";
          echo "</td>";
          echo "</tr>";
    }

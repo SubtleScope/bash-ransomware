@@ -31,12 +31,18 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
                $result1 = $conn->query($sql1);
 
                if ($result1->num_rows >= 0) {
+                  echo "<font color=\"blue\">";
                   echo "Expired!";
+                  echo "</font>";
                } else {
+                  echo "<font color=\"green\">";
                   echo "$row[time_left]";
+                  echo "</font>";
                }
             } else {
+               echo "<font color=\"green\">";
                echo "$row[time_left]";
+               echo "</font>";
             }
       }
    } else {
