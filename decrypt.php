@@ -87,7 +87,8 @@ $conn->close();
 ?>
 
 </head>
-<body>
+<body background="/hacked.jpg" style='background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: 100% 100%;'>
+  <font color="red">
   <br /><br />
   <div id="what_happened">
     * What happened to your files?
@@ -129,5 +130,6 @@ $conn->close();
       <input type="submit" value="Submit">
     </form>
   </div>
+  </font>
 </body>
 <html>

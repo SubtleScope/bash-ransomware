@@ -55,6 +55,3 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
 $conn->close();
 
 ?>
-
-  </body>
-</html>
