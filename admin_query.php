@@ -27,7 +27,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
             if ($row['time_left'] < "00:00:01") {
-               $sql1 = "UPDATE target_list SET time_expired=\"TRUE\" where unique_id = \"$targetID\"";
+               $sql1 = "UPDATE target_list SET time_expired=\"1\" where unique_id = \"$targetID\"";
                $result1 = $conn->query($sql);
 
                if ($result->num_rows > 0) {

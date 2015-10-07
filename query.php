@@ -30,7 +30,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
                echo "$('#form_div').hide();" . "\n";
                echo "$('#what_happened').hide();" . "\n";
 
-               $sql1 = "UPDATE target_list SET time_expired=\"TRUE\" where unique_id = \"$targetID\"";
+               $sql1 = "UPDATE target_list SET time_expired=\"1\" where unique_id = \"$targetID\"";
                $result1 = $conn->query($sql);
 
                if ($result->num_rows > 0) {
