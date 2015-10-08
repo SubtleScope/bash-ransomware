@@ -15,7 +15,7 @@
  - $ cp crypto.sh /var/www/html/downloads/
  - $ cp pub.pem /var/www/html/downloads/
  - $ cp key.bin /var/www/html/downloads/
- - $ python SimplHTTPServer 8080 &
+ - $ python -m SimplHTTPServer 8080 &
  - $ mv dec_auth.php /var/www/html/
  - $ mv target.php /var/www/html/
  - $ mv query.php /var/www/html/
