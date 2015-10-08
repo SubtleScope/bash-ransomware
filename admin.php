@@ -10,8 +10,7 @@
   <body background="/hacker.jpg" style='background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: 100% 100%;'>
     <center>
     <table border='0'>
-      <tr>
-        <font color="white">
+      <tr style="color: white;">
         <td align='center'>
           <b>ID</b>
         </td>
@@ -33,7 +32,6 @@
         <td align='center'>
           <b>Timer</b>
         </td>
-        </font>
       </tr>
 <?php
 
