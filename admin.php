@@ -11,6 +11,7 @@
     <center>
     <table border='0'>
       <tr>
+        <font color="white">
         <td align='center'>
           <b>ID</b>
         </td>
@@ -32,6 +33,7 @@
         <td align='center'>
           <b>Timer</b>
         </td>
+        </font>
       </tr>
 <?php
 
