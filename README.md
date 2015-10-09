@@ -36,7 +36,7 @@
 
 ## What it does
  - Downloads the public key and key file to the target
- - Move DB settings into a common.php file and refer to that file ineach of the scripts (One place to edit instead of numerous places)
+ - Move DB settings into a common.php file and refer to that file in each of the scripts (One place to edit instead of numerous places)
  - Loops through the system and encrypts the various files
  - Deletes the key file and leaves the public key
  - Prints the ransom message
