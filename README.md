@@ -46,11 +46,9 @@
  - Configure script to download over https, more covert
  - Add in error handling for non-existing files
  - Imporve functionality and capabilities
- - Add persistent ransom demand
  - Unique key pair per victim (In work)
  - Add Screenshots
  - Make ransom message on web page prettier 
- - Create information text file or html file in each directory
 
 ## Acknowledgements/Contributors
   - Special thanks to zmallen and his lollocker (https://github.com/zmallen/lollocker)
