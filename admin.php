@@ -3,11 +3,11 @@
     <title>
       Admin Portal
     </title>
-    <script src="/jquery.js">
+    <script src="/scripts/jquery.js">
     </script>
   </head>
 
-  <body background="/hacker.jpg" style='background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: 100% 100%;'>
+  <body background="/images/hacker.jpg" style='background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: 100% 100%;'>
     <center>
     <table border='0'>
       <tr style="color: white;">
