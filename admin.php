@@ -21,6 +21,9 @@
           <b>Target IP</b>
         </td>
         <td align='center'>
+          <b>File Count</b>
+        </td>
+        <td align='center'>
           <b>Infection Time</b>
         </td>
         <td align='center'>
@@ -74,6 +77,9 @@ if ($result->num_rows > 0) {
          echo "</td>";
          echo "<td align=\"center\">";
          echo "$row[target_ip]";
+         echo "</td>";
+         echo "<td align=\"center\">";
+         echo "$row[file_count]";
          echo "</td>";
          echo "<td align=\"center\">";
          echo "$row[curr_time]";
