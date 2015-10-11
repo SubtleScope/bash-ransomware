@@ -57,7 +57,7 @@
 ## What it does
  - Downloads the public key from our server 
  - Generates a key file on the target
- - Loops through the system and Uses AES-256 to encrypt the systems on the file using the key generated on the target
+ - Loops through the system for files with the defined extensions and Uses AES-256 to encrypt the files on the system using the generated key
  - Deletes the original file, leaving only the encrypted file
  - The key file is then encrypted using the public key (RSA-4096)
  - Prints a ransom message and then persists that message through cron
@@ -66,7 +66,6 @@
 
 ## TODO
  - Create unique private/public key-pair per victim
- - Configure script to download over https, more covert
  - Move DB settings into a common.php file and refer to that file in each of the scripts (One place to edit instead of numerous places)
  - Add in error handling for non-existing files
  - Add Screenshots
@@ -78,3 +77,14 @@
 
 ## WARNING 
   - Use this tool at your own risk. Author is not responsible or liable if you damage your own system or others. Follow all local, state, federal, and international laws as it pertains to your geographic location. Do NOT use this tool maliciously as it is being released for educational purposes. This tools intended use is in cyber exercises or demonstrations of adversarial tools.
+
+## Screenshots
+
+   - Infected: <br />
+   ![Infected](/screenshots/infected.jpg?raw=true "Infected") <br />
+   - Decrypt: <br />
+   ![Decrypt](/screenshots/decrypt_page.jpg?raw=true "Decrypt") <br />
+   - Countdown: <br />
+   ![Countdown](/screenshots/time_countdown.jpg?raw=true "Countdown") <br />
+   - Admin: <br />
+   ![Admin](/screenshots/admin_portal.jpg?raw=true "Admin") <br />
