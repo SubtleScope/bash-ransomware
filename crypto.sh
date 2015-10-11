@@ -76,7 +76,7 @@ do
 
     rm -rf  ${file} &>/dev/null
 
-    let ${count}++
+    count=$((count + 1))
   done
 done
 
@@ -88,7 +88,7 @@ do
 
     rm -rf ${file} &>/dev/null
 
-    let ${count}++
+    count=$((count + 1))
   done
 done
 

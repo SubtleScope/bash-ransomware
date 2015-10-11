@@ -88,7 +88,7 @@ if ($result->num_rows > 0) {
          echo "$row[exp_time]";
          echo "</td>";
          echo "<td align=\"center\">";
-         if ($row[time_expired] == 1) {
+         if ($row['time_expired'] == 1) {
             echo "Expired";
          } else {
             echo "Not Expired";
