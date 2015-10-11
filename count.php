@@ -20,7 +20,7 @@ if (isset($uniqueId) && !empty($uniqueId)) {
    if ($fileCount > 0) {
       $sql = "UPDATE target_list SET file_count = $fileCount where unique_id = \"$uniqueId\"";
 
-      if ($conn->query($sqlStmt) === TRUE) {
+      if ($conn->query($sql) === TRUE) {
          echo "File Count Received";
       } else {
          echo "Error: " . $sqlStmt . "<br>" . $conn->error;
