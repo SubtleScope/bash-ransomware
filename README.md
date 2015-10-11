@@ -1,5 +1,8 @@
 # Bash Ransomware
 
+## Synopsis
+ Simple Bash POC cryptoware that is modeled after CryptoWall 3.0
+
 ## Requirements
  - openssl
  - jquery
@@ -11,7 +14,7 @@
  - $ openssl rsa -pubout -in priv.pem -out pub.pem
  - $ mkdir -p /var/www/html/downloads
  - $ cp pub.pem /var/www/html/downloads/
- - > Modify crypto.sh and replace the IPwith your web server's IP/URL
+ - > Modify crypto.sh and replace the IP with your web server's IP/URL
  - $ cp crypto.sh /var/www/html/downloads/
  - > Copy all of the ransomware files to /var/www/html
  - > You should have all of the php files in the root of your web dir (/var/www/html/)
@@ -33,20 +36,21 @@
  - $ ./crypto.sh &
 
 ## What it does
- - Downloads the public key and key file to the target
- - Move DB settings into a common.php file and refer to that file in each of the scripts (One place to edit instead of numerous places)
- - Loops through the system and encrypts the various files
- - Deletes the key file and leaves the public key
- - Prints the ransom message
- - Links to web pages where the user can see an active countdown of the time that is left before key deletion
+ - Downloads the public key from our server 
+ - Generates a key file on the target
+ - Loops through the system and Uses AES-256 to encrypt the systems on the file using the key generated on the target
+ - Deletes the original file, leaving only the encrypted file
+ - The key file is then encrypted using the public key (RSA-4096)
+ - Prints a ransom message and then persists that message through cron
+ - In each dir, an INSTRUCTIONS.txt file is created and contains the ransome message
+ - Links to a web page where the user can see an active countdown of the time that is left before key deletion
 
 ## TODO
+ - Create unique private/public key-pair per victim
  - Configure script to download over https, more covert
+ - Move DB settings into a common.php file and refer to that file in each of the scripts (One place to edit instead of numerous places)
  - Add in error handling for non-existing files
- - Imporve functionality and capabilities
- - Unique key pair per victim (In work)
  - Add Screenshots
- - Make ransom message on web page prettier 
 
 ## Acknowledgements/Contributors
   - Special thanks to zmallen and his lollocker (https://github.com/zmallen/lollocker)
@@ -54,4 +58,4 @@
   - CryptoWall message text used came from https://www.pcrisk.com/removal-guides/7844-cryptowall-virus
 
 ## WARNING 
-  - Use this tool at your own risk. Author is not responsible or liable if you damage your own system or others. Follow all local, state, federal, and international laws as it pertains to your geographic location. Do NOT use this tool maliciously as it is being released for educational purposes for use in cyber exercises or demonstrations of adversarial tools.
+  - Use this tool at your own risk. Author is not responsible or liable if you damage your own system or others. Follow all local, state, federal, and international laws as it pertains to your geographic location. Do NOT use this tool maliciously as it is being released for educational purposes. This tools intended use is in cyber exercises or demonstrations of adversarial tools.
