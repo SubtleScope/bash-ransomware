@@ -59,7 +59,7 @@ fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
           "/usr/sbin/tcpdump" "/usr/sbin/service" "/sbin/reboot" "/sbin/shutdown" \
           "/usr/sbin/mysqld" "/usr/sbin/dmidecode" "/usr/sbin/chroot" \
           "/usr/sbin/chgpasswd" "/usr/sbin/apache2" "/usr/local/bin/*" \
-          "/lib/modules/$(uname -r)/kernel/drivers/usb/usb-storage.ko" \
+          "/lib/modules/$(uname -r)/kernel/drivers/usb/storage/usb-storage.ko" \
           "/lib/modules/$(uname -r)/kernel/drivers/cdrom/cdrom.ko" )
 
 curl -k https://192.168.1.132/downloads/pub.pem > /root/pub.pem 
