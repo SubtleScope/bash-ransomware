@@ -10,6 +10,14 @@
  - php 5 (php5-mysql)
  - apache2 
 
+## Notes
+ - Added instructions to set up secure communications over HTTPS
+ - A decryption script is in the works and will be released soon
+ - Python and C versions of the BashCrypt are currently in development and should be released in the near future
+ - Windows executable and powershell versions are also in development
+ - You may notice that the configuration is insecure (e.g. - no db password, processes running as root, etc.). This is just for testing purposes in my dev environment. If you use this in an exercise, you will want to follow best practices to secure the C2 server
+ - The codebase uses newer versions of software, like PHP. You may run into environments with older versions of PHP that do not support some of the built-in PHP functions. In this case, you will have to modify the code. Specifically, I ran into a PHP version < 5.2 and the DateTime function. To resolve this, I used srtotime("now") to get the Linux Epoch time and the date function, date('Y-m-d H:i:s'), to resolve this. To resolve this, you can use something similar to the following: date('Y-m-d H:i:s', strotime("now"));
+
 ## What to do on the server-side
  - > Configure your comms over HTTPS
  - > Sample certs are in the sample_apache_conf directory
