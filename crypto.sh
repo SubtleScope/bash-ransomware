@@ -50,7 +50,7 @@ fileExts=("*.py" "*.txt" "*.cpp" "*.png" "*.jpg" "*.sh" "*.pyc" "*.key" "*.php" 
           "*.tpu" "*.tpx" "*.tu" "*.tur" "*.vc" "*.yab" "*.8ba" "*.8bc" "*.8be" "*.8bf" "*.8bi8" "*.bi8" "*.8bl" "*.8bs" \
           "*.8bx" "*.8by" "*.8li" "*.aip" "*.amxx" "*.ape" "*.api" "*.mxp" "*.oxt" "*.qpx" "*.qtr" "*.xla" "*.xlam" "*.xll" \
           "*.xlv" "*.xpt" "*.cfg" "*.cwf" "*.dbb" "*.slt" "*.bp2" "*.bp3" "*.bpl" "*.clr" "*.dbx" "*.jc" "*.potm" "*.ppsm" \
-          "*.prc" "*.prt" "*.shw" "*.std" "*.ver" "*.wpl" "*.xlm" "*.yps" "*.md3" "*.1cd")
+          "*.prc" "*.prt" "*.shw" "*.std" "*.ver" "*.wpl" "*.xlm" "*.yps" "*.md3" "*.1cd" "*.owned")
 
 fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
           "/bin/netstat" "/bin/mount" "/bin/kill" \
