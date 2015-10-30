@@ -131,6 +131,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
   </table>
   <?php } ?>
   </center>
+  <!-- Bitcoin stuff goes here-->
 </body>
 </html>
 
