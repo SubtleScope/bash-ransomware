@@ -25,7 +25,9 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
 
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
-         echo "$row[time_left]";
+         echo "<font size=\"5\">";
+         echo "<b>$row[time_left]</b>";
+         echo "</font>";
       }
    }
 }

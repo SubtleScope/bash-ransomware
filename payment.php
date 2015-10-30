@@ -60,7 +60,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
 
 <body bgcolor="lightblue">
   <center>
-  <?php if ($row['time_left'] > "00:00:01") { ?>
+  <?php if ($getCountdown > "00:00:01") { ?>
   <table style="background: white;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;">
     <tr>
       <td align="center">
