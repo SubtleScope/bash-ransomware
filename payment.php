@@ -27,8 +27,9 @@ $getCountdown = "";
 $getExpTime = "";
 
 if (isset($_GET['trans_id']) && !empty($_GET['trans_id'])) {
-   if ($_GET['trans_id'] < 10000 && $_GET['trans_id'] > 100) {
+   if (strlen($_GET['trans_id']) == 64) {
       echo "<script>alert(\"Your transaction id has been confirmed, Please wait!\");</script>";
+      <!-- redirect page with script download instructions -->
    } else {
       echo "<script>alert(\"Your transaction id could not be confirmed, Please try again!\");</script>";
    } 
