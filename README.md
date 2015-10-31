@@ -81,6 +81,7 @@
   - Special thanks to zmallen and his lollocker (https://github.com/zmallen/lollocker)
   - lollocker served as the inspiration for this project
   - CryptoWall message text used came from https://www.pcrisk.com/removal-guides/7844-cryptowall-virus
+  - Excellent CryptoWall 3.0 Writeup: http://blog.brillantit.com/?p=15
 
 ## WARNING 
   - Use this tool at your own risk. Author is not responsible or liable if you damage your own system or others. Follow all local, state, federal, and international laws as it pertains to your geographic location. Do NOT use this tool maliciously as it is being released for educational purposes. This tools intended use is in cyber exercises or demonstrations of adversarial tools.
