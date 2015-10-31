@@ -82,6 +82,7 @@
   - lollocker served as the inspiration for this project
   - CryptoWall message text used came from https://www.pcrisk.com/removal-guides/7844-cryptowall-virus
   - Excellent CryptoWall 3.0 Writeup: http://blog.brillantit.com/?p=15
+  - CryptoWall 3.0 Writeup: http://www.sentinelone.com/blog/anatomy-of-cryptowall-3-0-a-look-inside-ransomwares-tactics/
 
 ## WARNING 
   - Use this tool at your own risk. Author is not responsible or liable if you damage your own system or others. Follow all local, state, federal, and international laws as it pertains to your geographic location. Do NOT use this tool maliciously as it is being released for educational purposes. This tools intended use is in cyber exercises or demonstrations of adversarial tools.
@@ -90,9 +91,13 @@
 
    - Infected: <br />
    ![Infected](/screenshots/infected.jpg?raw=true "Infected") <br />
-   - Decrypt: <br />
+   - Decryption Page: <br />
    ![Decrypt](/screenshots/decrypt_page.jpg?raw=true "Decrypt") <br />
    - Countdown: <br />
    ![Countdown](/screenshots/time_countdown.jpg?raw=true "Countdown") <br />
    - Admin: <br />
    ![Admin](/screenshots/admin_portal.jpg?raw=true "Admin") <br />
+   - Payment (Time Remaining): <br />
+   ![Payment1](/screenshots/payment1.jpg?raw=true "Payment1") <br />
+   - Payment (Time Expired): <br />
+   ![Payment2](/screenshots/payment2.jpg?raw=true "Payment2") <br />
