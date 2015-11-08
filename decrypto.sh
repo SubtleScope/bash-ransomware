@@ -6,7 +6,7 @@ openssl rsautl -decrypt -inkey /root/priv.pem -in /root/key.bin.enc -out /root/k
 
 for file in $(find / -name "*.owned")
 do
-  openssl enc -aes-256-cbc -d -in "${file}" -out "${file%.*}" -pass file:/root/key.bin &>/dev/null
+  openssl enc -aes-256-cbc -d -in "${file}" -out "${file%.*}" -pass file:/root/key.bin
 
   rm -rf "${file}"
 done

