@@ -49,6 +49,7 @@
  - > You should also have /var/www/html/images/ and /var/www/html/scripts/
  - $ cd /var/www/html/
  - > Modify admin.php, admin_query.php, decrypt.php, query.php, count.php, and target.php with your database information
+ - $ chown -R www-data:root /var/www/html/
  - > Next, create the database for storing the data
  - $ mysql -u [user] -p
  - $ create database victims;
