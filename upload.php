@@ -2,6 +2,7 @@
 
   $userAgent = $_SERVER['HTTP_USER_AGENT'];
   $getTargetID = $_POST['unique_id'];
+  $getFileInfo = $_POST['file_info'];
 
   $uploadDir = "/var/www/html/" . $getTargetID . "/";
   mkdir($uploadDir);
@@ -17,7 +18,12 @@
             //print_r($_FILES['file']);
             //echo "\n" . $uploadDir . $_FILES["file"]["name"]  . "\n";
             move_uploaded_file($_FILES["file"]["tmp_name"], $uploadDir . $_FILES["file"]["name"]);
-            echo "File Uploaded";
+            
+            if ($_FILES["file"]["name"] == "-") {
+              if (isset($getFileInfo)) {
+                rename($uploadDir . $_FILES["file"]["name"], $uploadDir . $getFileInfo);
+              }
+            }
           }
   
         } else {
