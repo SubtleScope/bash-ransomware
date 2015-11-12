@@ -35,6 +35,9 @@
         <td align='center'>
           <b>Timer</b>
         </td>
+        <td align='center'>
+          <b>Paid</b>
+        </td>
       </tr>
 <?php
 
@@ -104,6 +107,13 @@ if ($result->num_rows > 0) {
          echo "  });" . "\n";
          echo "</script>" . "\n";
          echo "<td id=\"test$row[id]\" align=\"center\">";
+         echo "</td>";
+         echo "<td align=\"center\">";
+         if ($row['paid'] == 0) {
+           echo "<font color='red'>No</font>";
+         } else {
+           echo "<font color='green'>Yes</font>";
+         }
          echo "</td>";
          echo "</tr>";
    }
