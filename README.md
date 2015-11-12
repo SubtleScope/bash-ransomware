@@ -10,8 +10,19 @@
  - php 5 (php5-mysql)
  - apache2 
 
+## Features
+ - Secure Comunications over HTTPS to the C2 
+ - Data Exfil from the target (key, /home/, /root) - Based on Chimera Ransomware that threatens to release private documents if ransom is not paid
+ - File Encryption based on a set of defined file extensions, should encrypt files in '/' and encrypt mount points (USB, NFS, etc.)
+
+## Feature Requests
+ - Filename encryption (Modeled after CryptoWall 4.0) - In Work
+ - Unique RSA key-pair per victim
+ - Update payment page: If payment is received, provide two delay, then automatically release BashDecrypt (decrypto.sh and the private key in a unique directory)
+ - Update Ransom message on host to relfect CryptoWall 4.0 (Update .txt version and include a .html version)
+ - More features will go here...
+
 ## Notes
- - Added instructions to set up secure communications over HTTPS
  - Python and C versions of the BashCrypt are currently in development and should be released in the near future
  - Windows executable and powershell versions are also in development
  - You may notice that the configuration is insecure (e.g. - no db password, processes running as root, etc.). This is just for testing purposes in my dev environment. If you use this in an exercise, you will want to follow best practices to secure the C2 server
@@ -75,15 +86,17 @@
 ## TODO
  - Create unique private/public key-pair per victim
  - Move DB settings into a common.php file and refer to that file in each of the scripts (One place to edit instead of numerous places)
- - Add in error handling for non-existing files
- - Add Screenshots
 
 ## Acknowledgements/Contributors
   - Special thanks to zmallen and his lollocker (https://github.com/zmallen/lollocker)
   - lollocker served as the inspiration for this project
   - CryptoWall message text used came from https://www.pcrisk.com/removal-guides/7844-cryptowall-virus
+
+## Sources
   - Excellent CryptoWall 3.0 Writeup: http://blog.brillantit.com/?p=15
   - CryptoWall 3.0 Writeup: http://www.sentinelone.com/blog/anatomy-of-cryptowall-3-0-a-look-inside-ransomwares-tactics/
+  - Chimera Ransomware: https://threatpost.com/chimera-ransomware-promises-to-publish-encrypted-data-online/115293/
+  - CryptoWall 4.0: http://securityaffairs.co/wordpress/41718/cyber-crime/cryptowall-4-0-released.html
 
 ## WARNING 
   - Use this tool at your own risk. Author is not responsible or liable if you damage your own system or others. Follow all local, state, federal, and international laws as it pertains to your geographic location. Do NOT use this tool maliciously as it is being released for educational purposes. This tools intended use is in cyber exercises or demonstrations of adversarial tools.
