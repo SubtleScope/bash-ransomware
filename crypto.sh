@@ -113,7 +113,7 @@ getTTY=$(tty)
 
 if [ "${osType}" == "redhat" ]
 then
-  /usr/bin/crontab -l | { cat; echo "1 * * * * /etc/cron.hourly/instructions.sh > ${getTTy}"; } | /usr/bin/crontab - &>/dev/null
+  /usr/bin/crontab -l | { cat; echo "1 * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab - &>/dev/null
 elif [ "${osType}" == "debian" ]
 then
   /usr/bin/crontab -l | { cat; echo "*/1 * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab - &>/dev/null
