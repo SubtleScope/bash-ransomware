@@ -1,7 +1,7 @@
 # Bash Ransomware
 
 ## Synopsis
- Simple Bash POC cryptoware that is modeled after CryptoWall 3.0
+ Simple Bash POC cryptoware that is modeled after CryptoWall 3.0/4.0
 
 ## Requirements
  - openssl
