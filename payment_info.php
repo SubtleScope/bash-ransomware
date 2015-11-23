@@ -54,15 +54,25 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
 $conn->close();
 
 ?>
-  <body>
+  <body bgcolor="lightblue">
     <center>
-      <h1>
-        <font color="green">
-          Time Remaining Until Decryption Possible:
-          <br /><br />
-          <div id="show_timer" name="show_timer"></div>
-        </font>
-      </h1>
+      <table style="padding-left: 1em; padding-right: 1em; background: white;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;">
+        <tr>
+          <td>
+            <h1>
+              <font color="green">
+                Time Remaining Until Decryption Possible:
+                <br /><br />
+              </font>
+            </h1>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div id="show_timer" name="show_timer"></div>
+          </td>
+        </tr>
+      </table>
     </center>
   </body>
 </html>
