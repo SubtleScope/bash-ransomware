@@ -105,8 +105,8 @@
    - Infected: <br />
    ![Infected](/screenshots/infected.jpg?raw=true "Infected") <br />
    - Instructions: <br />
-   ![Instructions](/screenshots/INSTRUCTIONS_1.jpg?raw=true "Instructions") <br />
-   ![Instructions](/screenshots/INSTRUCTIONS_2.jpg?raw=true "Instructions") <br />
+   ![Instructions 1](/screenshots/INSTRUCTIONS_1.jpg?raw=true "Instructions 1") <br />
+   ![Instructions 2](/screenshots/INSTRUCTIONS_2.jpg?raw=true "Instructions 2") <br />
    - Decryption Page: <br />
    ![Decrypt](/screenshots/decrypt_page.jpg?raw=true "Decrypt") <br />
    - Countdown: <br />
@@ -117,3 +117,7 @@
    ![Payment1](/screenshots/payment1.jpg?raw=true "Payment1") <br />
    - Payment (Time Expired): <br />
    ![Payment2](/screenshots/payment2.jpg?raw=true "Payment2") <br />
+   - After Payment (2 Hour Wait): <br />
+   ![AfterPayment1](/screenshots/Decryption_After_Payment_1.jpg?raw=true "AfterPayment1") <br />
+   - After Payment (Downloads Available): <br />
+   ![AfterPayment2](/screenshots/Decryption_After_Payment_2.jpg?raw=true "AfterPayment2") <br />
