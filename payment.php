@@ -28,7 +28,24 @@ $getExpTime = "";
 
 if (isset($_GET['trans_id']) && !empty($_GET['trans_id'])) {
    if (strlen($_GET['trans_id']) == 64) {
-      echo "<script>alert(\"Your transaction id has been confirmed, Please wait!\");</script>";
+      $sql = "UPDATE target_list SET paid = 1 where unique_id = \"$getTargetID\"";
+
+      if ($conn->query($sql) === TRUE) {
+         $expTime = time() + (1 * 2 * 60 * 60);
+         $dateExpTime = new DateTime("@$expTime");
+         $expTime = $dateExpTime->format('Y-m-d H:i:s');
+
+         $sql1 = "UPDATE target_list SET paid_count = \"$expTime\" WHERE unique_id = \"$getTargetID\"";
+         echo "$sql1";
+         if ($conn->query($sql1) === TRUE) {
+            echo "<script>alert(\"Your transaction id has been confirmed, Please wait!\");</script>";
+            header('location: https://' .  $_SERVER['SERVER_NAME'] . '/payment_info.php?unique_id=' . $getTargetID);
+         } else {
+            echo "<script>alert(\"Error 1: An unexpected error occurred, please try again momentarily.\")</script>";
+         }
+      } else {
+         echo "<script>alert(\"Error 2: An unexpected error occurred, please try again momentarily.\")</script>";
+      }
    } else {
       echo "<script>alert(\"Your transaction id could not be confirmed, Please try again!\");</script>";
    } 

