@@ -104,6 +104,9 @@
 
    - Infected: <br />
    ![Infected](/screenshots/infected.jpg?raw=true "Infected") <br />
+   - Instructions: <br />
+   ![Instructions](/screenshots/INSTRUCTIONS_1.jpg?raw=true "Instructions") <br />
+   ![Instructions](/screenshots/INSTRUCTIONS_2.jpg?raw=true "Instructions") <br />
    - Decryption Page: <br />
    ![Decrypt](/screenshots/decrypt_page.jpg?raw=true "Decrypt") <br />
    - Countdown: <br />
