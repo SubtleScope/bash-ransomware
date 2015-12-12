@@ -144,8 +144,9 @@ do
   do
     setFileName=$(genFileName)
     setExtName=$(genExtName)
-
-    openssl enc -aes-256-cbc -salt -in "${file}" -out "${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
+    getDirName="$(dirname ${file})"
+   
+    openssl enc -aes-256-cbc -salt -in "${file}" -out "${getDirName}/${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
 
     rm -rf  ${file} &>/dev/null
 
@@ -159,8 +160,9 @@ do
   do
     setFileName=$(genFileName)
     setExtName=$(genExtName)
+    getDirName="$(dirname ${file})"
 
-    openssl enc -aes-256-cbc -salt -in "${file}" -out "${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
+    openssl enc -aes-256-cbc -salt -in "${file}" -out "${getDirName}/${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
 
     rm -rf ${file} &>/dev/null
 
