@@ -13,11 +13,12 @@
 ## Features
  - Secure Comunications over HTTPS to the C2 
  - Data Exfil from the target (key, /home/, /root) - Based on Chimera Ransomware that threatens to release private documents if ransom is not paid
+ - UPDATE: 12 Dec 2015 -> Filename encryption has been added (Reference: Talos CW 4.0 Report)
  - File Encryption based on a set of defined file extensions, should encrypt files in '/' and encrypt mount points (USB, NFS, etc.)
 
 ## Feature Requests
- - Filename encryption (Modeled after CryptoWall 4.0) - In Work
  - Unique RSA key-pair per victim
+ - Move DB settings into a common.php file and refer to that file in each of the scripts (One place to edit instead of numerous places)
  - More features will go here...
 
 ## Notes
@@ -81,10 +82,6 @@
  - In each dir, an INSTRUCTIONS.txt file is created and contains the ransome message
  - Links to a web page where the user can see an active countdown of the time that is left before key deletion
 
-## TODO
- - Create unique private/public key-pair per victim
- - Move DB settings into a common.php file and refer to that file in each of the scripts (One place to edit instead of numerous places)
-
 ## Acknowledgements/Contributors
   - Special thanks to zmallen and his lollocker (https://github.com/zmallen/lollocker)
   - lollocker served as the inspiration for this project
@@ -96,6 +93,7 @@
   - Chimera Ransomware: https://threatpost.com/chimera-ransomware-promises-to-publish-encrypted-data-online/115293/
   - CryptoWall 4.0: http://securityaffairs.co/wordpress/41718/cyber-crime/cryptowall-4-0-released.html
   - CryptoWall 4.0 DECRYPT.html: http://www.bleepstatic.com/images/news/ransomware/cryptowall/v4/note-part-1.jpg
+  - Talos CryptoWall 4.0 Report: http://blog.talosintel.com/2015/12/cryptowall-4.html
 
 ## WARNING 
   - Use this tool at your own risk. Author is not responsible or liable if you damage your own system or others. Follow all local, state, federal, and international laws as it pertains to your geographic location. Do NOT use this tool maliciously as it is being released for educational purposes. This tools intended use is in cyber exercises or demonstrations of adversarial tools.
@@ -104,6 +102,8 @@
 
    - Infected: <br />
    ![Infected](/screenshots/infected.jpg?raw=true "Infected") <br />
+   - Encrypted Filenames: <br />
+   ![Filenames](/screnshots/filename_encrypt.jpg?raw=true "Filenames") <br />
    - Instructions: <br />
    ![Instructions 1](/screenshots/INSTRUCTIONS_1.jpg?raw=true "Instructions 1") <br />
    ![Instructions 2](/screenshots/INSTRUCTIONS_2.jpg?raw=true "Instructions 2") <br />
