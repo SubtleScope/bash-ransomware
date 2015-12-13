@@ -103,7 +103,9 @@
    - Infected: <br />
    ![Infected](/screenshots/infected.jpg?raw=true "Infected") <br />
    - Encrypted Filenames: <br />
-   ![Filenames](/screenshots/filename_encrypt.jpg?raw=true "Filenames") <br />
+   ![Filenames1](/screenshots/filename_encrypt.jpg?raw=true "Filenames1") <br />
+   - Decrypted Filenames: <br />
+   ![Filenames2](/screenshots/filename_decrypt.jpg?raw=true "Filenames2") <br />
    - Instructions: <br />
    ![Instructions 1](/screenshots/INSTRUCTIONS_1.jpg?raw=true "Instructions 1") <br />
    ![Instructions 2](/screenshots/INSTRUCTIONS_2.jpg?raw=true "Instructions 2") <br />
