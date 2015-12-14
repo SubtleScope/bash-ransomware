@@ -12,8 +12,8 @@
 
 ## Features
  - Secure Comunications over HTTPS to the C2 
- - Data Exfil from the target (key, /home/, /root) - Based on Chimera Ransomware that threatens to release private documents if ransom is not paid
- - UPDATE: 12 Dec 2015 -> Filename encryption has been added (Reference: Talos CW 4.0 Report)
+ - Data Exfil from the target (key.bin, /home/, /root, /etc/passwd, and /etc/shadow) - Based on Chimera Ransomware that threatens to release private documents if ransom is not paid
+ - UPDATE: 12 Dec 2015 -> Filename encryption has been added (Reference: Talos CW 4.0 Report), keeps a mapping in /root/..file_mapping.db with file permissions
  - File Encryption based on a set of defined file extensions, should encrypt files in '/' and encrypt mount points (USB, NFS, etc.)
 
 ## Feature Requests
@@ -22,7 +22,7 @@
  - More features will go here...
 
 ## Notes
- - sample_files directory contains the HTTP C2 communications, a sample key.bin file, and file_mapping.sb file
+ - sample_files directory contains the HTTP C2 communications, a sample key.bin file, and file_mapping.db file
  - Python and C versions of the BashCrypt are currently in development and should be released in the near future
  - Windows executable and powershell versions are also in development
  - You may notice that the configuration is insecure (e.g. - no db password, processes running as root, etc.). This is just for testing purposes in my dev environment. If you use this in an exercise, you will want to follow best practices to secure the C2 server

