@@ -84,14 +84,13 @@
  - Links to a web page where the user can see an active countdown of the time that is left before key deletion
 
 ## Acknowledgements/Contributors
-  - Special thanks to zmallen and his lollocker (https://github.com/zmallen/lollocker)
-  - lollocker served as the inspiration for this project
-  - CryptoWall message text used came from https://www.pcrisk.com/removal-guides/7844-cryptowall-virus
+  - Special thanks to zmallen and his lollocker (https://github.com/zmallen/lollocker) => lollocker served as the inspiration for this project
 
 ## Sources
   - Excellent CryptoWall 3.0 Writeup: http://blog.brillantit.com/?p=15
   - CryptoWall 3.0 Writeup: http://www.sentinelone.com/blog/anatomy-of-cryptowall-3-0-a-look-inside-ransomwares-tactics/
   - Chimera Ransomware: https://threatpost.com/chimera-ransomware-promises-to-publish-encrypted-data-online/115293/
+  - CryptoWall message text used came from https://www.pcrisk.com/removal-guides/7844-cryptowall-virus
   - CryptoWall 4.0: http://securityaffairs.co/wordpress/41718/cyber-crime/cryptowall-4-0-released.html
   - CryptoWall 4.0 DECRYPT.html: http://www.bleepstatic.com/images/news/ransomware/cryptowall/v4/note-part-1.jpg
   - Talos CryptoWall 4.0 Report: http://blog.talosintel.com/2015/12/cryptowall-4.html
