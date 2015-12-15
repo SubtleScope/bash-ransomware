@@ -22,6 +22,7 @@
  - More features will go here...
 
 ## Notes
+ - Added Encryption and Decryption Run Times (Run times were calculated with the new filename encryption - run times are obviously longer than without)
  - sample_files directory contains the HTTP C2 communications, a sample key.bin file, and file_mapping.db file
  - Python and C versions of the BashCrypt are currently in development and should be released in the near future
  - Windows executable and powershell versions are also in development
@@ -113,6 +114,10 @@
    ![Filenames1](/screenshots/filename_encrypt.jpg?raw=true "Filenames1") <br />
    - Decrypted Filenames: <br />
    ![Filenames2](/screenshots/filename_decrypt.jpg?raw=true "Filenames2") <br />
+   - Encryption Run Time: <br />
+   ![Erun](/screenshots/EncryptTime.jpg?raw=true "Erun") <br />
+   - Decryption Run Time: <br />
+   ![Drun](/screenshots/DecryptTime.jpg?raw=true "Drun") <br />
    - Instructions: <br />
    ![Instructions 1](/screenshots/INSTRUCTIONS_1.jpg?raw=true "Instructions 1") <br />
    ![Instructions 2](/screenshots/INSTRUCTIONS_2.jpg?raw=true "Instructions 2") <br />
