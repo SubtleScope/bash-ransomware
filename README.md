@@ -26,7 +26,14 @@
  - Python and C versions of the BashCrypt are currently in development and should be released in the near future
  - Windows executable and powershell versions are also in development
  - You may notice that the configuration is insecure (e.g. - no db password, processes running as root, etc.). This is just for testing purposes in my dev environment. If you use this in an exercise, you will want to follow best practices to secure the C2 server
- - The codebase uses newer versions of software, like PHP. You may run into environments with older versions of PHP that do not support some of the built-in PHP functions. In this case, you will have to modify the code. Specifically, I ran into a PHP version < 5.2 and the DateTime function. To resolve this, I used srtotime("now") to get the Linux Epoch time and the date function, date('Y-m-d H:i:s'), to resolve this. To resolve this, you can use something similar to the following: date('Y-m-d H:i:s', strotime("now"));
+ - The codebase uses newer versions of software, like PHP. You may run into environments with older versions of PHP that do not support some of the built-in PHP functions. In this case, you will have to modify the code. Specifically, I ran into a PHP version that was < 5.2 and the DateTime function is not in that release.
+ - To solve this, repleace the occurences of DateTime to the following:
+ - # target.php
+ - > $expTime = time() + (2 * 24 * 60 * 60);
+ - > $dateExpTime = strtotime($expTime);
+ - > $expTime = date('Y-m-d H:i:s', $dateExpTime);
+ - # Or in one line:
+ - > $expTime = date('Y-m-d H:i:s', strtotime(time() + (2 * 24 * 60 * 60)));
 
 ## What to do on the server-side
  - > Configure your comms over HTTPS
