@@ -19,7 +19,10 @@
 ## Feature Requests
  - Unique RSA key-pair per victim
  - Move DB settings into a common.php file and refer to that file in each of the scripts (One place to edit instead of numerous places)
- - More features will go here...
+
+## Bugs
+ - After payment has been submitted, the page will count down past 00:00:00 into negative time (-00:00:34) - The user has to manually refresh the page in order to gain access to the download links
+ - Since the program encrypts critical files, some files may not be properly restored which partially breaks the host (Working on better restoration processes)
 
 ## Notes
  - Added Encryption and Decryption Run Times (Run times were calculated with the new filename encryption - run times are obviously longer than without)
