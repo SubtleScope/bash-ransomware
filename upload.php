@@ -15,8 +15,6 @@
           if ($_FILES['file']['error'] > 0) {
             echo "Error: " . $_FILES['file']['error'];
           } else {
-            //print_r($_FILES['file']);
-            //echo "\n" . $uploadDir . $_FILES["file"]["name"]  . "\n";
             move_uploaded_file($_FILES["file"]["tmp_name"], $uploadDir . $_FILES["file"]["name"]);
             
             if ($_FILES["file"]["name"] == "-") {
