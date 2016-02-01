@@ -46,5 +46,6 @@ done
 
 crontab -r 
 rm -rf /etc/cron.hourly/instructions.sh
+rm -rf /etc/cron.hourly/backup.sh
 rm -rf /root/..file_mapping.db /root/..file_mapping.db.owned
 rm -rf /root/key.bin /root/key.bin.enc /root/priv.pem /root/pub.pem /root/crypto.sh
