@@ -38,7 +38,7 @@ if (isset($_GET['trans_id']) && !empty($_GET['trans_id'])) {
                $sql = "UPDATE target_list SET paid = 1 where unique_id = \"$getTargetID\"";
 
                if ($conn->query($sql) === TRUE) {
-                  $expTime = time() + (1 * 2 * 60 * 60);
+                  $expTime = time() + (1 * 2 * 60 * 10);
                   $dateExpTime = new DateTime("@$expTime");
                   $expTime = $dateExpTime->format('Y-m-d H:i:s');
 
