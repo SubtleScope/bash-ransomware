@@ -13,8 +13,9 @@
 ## Features
  - Secure Comunications over HTTPS to the C2 
  - Data Exfil from the target (key.bin, /home/, /root, /etc/passwd, and /etc/shadow) - Based on Chimera Ransomware that threatens to release private documents if ransom is not paid
- - UPDATE: 12 Dec 2015 -> Filename encryption has been added (Reference: Talos CW 4.0 Report), keeps a mapping in /root/..file_mapping.db with file permissions
+ - Filename and File extension encryption has been added (Reference: Talos CW 4.0 Report), keeps a mapping in /root/..file_mapping.db with file permissions
  - File Encryption based on a set of defined file extensions, should encrypt files in '/' and encrypt mount points (USB, NFS, etc.)
+ - Screenshot functionality (Still in development for wider OS support + Support for terminal only systems)
 
 ## Feature Requests
  - Unique RSA key-pair per victim
