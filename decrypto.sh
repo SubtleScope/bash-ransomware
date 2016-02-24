@@ -10,6 +10,9 @@ fi
 # Set the permissions on /root/priv.pem
 chmod 755 /root/priv.pem
 
+# Correct the Private Key Heading
+sed -i 's/-----BEGIN PRIVATE KEY-----/-----BEGIN RSA PRIVATE KEY-----/g' /root/priv.pem
+
 # Decrypt the Key file with the Private key
 openssl rsautl -decrypt -inkey /root/priv.pem -in /root/key.bin.enc -out /root/key.bin
 
