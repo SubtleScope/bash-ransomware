@@ -15,8 +15,14 @@ if ($conn->connect_error) {
 function genKeys($targetID) {
   // Adapted from http://goo.gl/7MqUYh
 
+  $config = array(
+    "digest_alg" => "sha512",
+    "private_key_bits" => 4096,
+    "private_key_type" => OPENSSL_KEYTYPE_RSA,
+  );
+
   // Create the keypair
-  $genKey = openssl_pkey_new();
+  $genKey = openssl_pkey_new($config);
   
   // Get private key
   openssl_pkey_export($genKey, $privKey, NULL);
