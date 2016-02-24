@@ -25,12 +25,13 @@ function genKeys($targetID) {
   $genKey = openssl_pkey_new($config);
   
   // Get private key
-  openssl_pkey_export($genKey, $privKey, NULL);
+  openssl_pkey_export($genKey, $privKey);
   
   // Get public key
   $pubKey = openssl_pkey_get_details($genKey);
   $pubKey = $pubKey["key"];
 
+  //openssl_pkey_export_to_file($privKey, "/var/www/html/downloads/" . $targetID . "_priv.pem");
   $setPrivKey = fopen("/var/www/html/downloads/" . $targetID . "_priv.pem", "w") or die("Unable to open file!");
   fwrite($setPrivKey, $privKey);
   fclose($setPrivKey);
