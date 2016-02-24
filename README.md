@@ -16,9 +16,9 @@
  - Filename and File extension encryption has been added (Reference: Talos CW 4.0 Report), keeps a mapping in /root/..file_mapping.db with file permissions
  - File Encryption based on a set of defined file extensions, should encrypt files in '/' and encrypt mount points (USB, NFS, etc.)
  - Screenshot functionality (Still in development for wider OS support + Support for terminal only systems)
+ - Unique Private/Public Key Pair per victim
 
 ## Feature Requests
- - Unique RSA key-pair per victim
  - Move DB settings into a common.php file and refer to that file in each of the scripts (One place to edit instead of numerous places)
 
 ## Bugs
@@ -34,16 +34,20 @@
  - The codebase uses newer versions of software, like PHP. You may run into environments with older versions of PHP that do not support some of the built-in PHP functions. In this case, you will have to modify the code. Specifically, I ran into a PHP version that was < 5.2 and the DateTime function is not in that release.
  - To solve this, repleace the occurences of DateTime to the following:
  - # target.php
- - > $expTime = time() + (2 * 24 * 60 * 60);
- - > $dateExpTime = strtotime($expTime);
- - > $expTime = date('Y-m-d H:i:s', $dateExpTime);
+ ```php
+ $expTime = time() + (2 * 24 * 60 * 60);
+ $dateExpTime = strtotime($expTime);
+ $expTime = date('Y-m-d H:i:s', $dateExpTime);
+ ```
  - # Or in one line:
- - > $expTime = date('Y-m-d H:i:s', strtotime(time() + (2 * 24 * 60 * 60)));
+ ```php
+ $expTime = date('Y-m-d H:i:s', strtotime(time() + (2 * 24 * 60 * 60)));
+ ```
 
 ## What to do on the server-side
  - > Configure your comms over HTTPS
  - > Sample certs are in the sample_apache_conf directory
- - $ openssl genrsa -des3 -passout pass:neveruseinsecurepasswords -out server.pass.key 4096
+ - $ `openssl genrsa -des3 -passout pass:neveruseinsecurepasswords -out server.pass.key 4096`
  - $ openssl rsa -passin pass:neveruseinsecurepasswords -in server.pass.key -out server.key 
  - $ openssl req -new -key server.key -out server.csr
  - $ openssl x509 -req -days 4096 -in server.csr  -signkey server.key -out server.crt
