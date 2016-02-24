@@ -13,26 +13,13 @@ if ($conn->connect_error) {
 } 
 
 function genKeys($targetID) {
-  // Adapted from http://goo.gl/2qN9zO
-  $passAlpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-  $genPass = array(); 
-  $passAlphaLength = strlen($passAlpha) - 1;
-  
-  for ($i = 0; $i < 16; $i++) {
-      $getChar = rand(0, $passAlphaLength);
-      $genPass[] = $passAlpha[$getChar];
-  }
-  
   // Adapted from http://goo.gl/7MqUYh
 
-  // Generate a strong passphrase
-  $genPass = implode($genPass);
-  
   // Create the keypair
   $genKey = openssl_pkey_new();
   
   // Get private key
-  openssl_pkey_export($genKey, $privKey, $genPass);
+  openssl_pkey_export($genKey, $privKey, NULL);
   
   // Get public key
   $pubKey = openssl_pkey_get_details($genKey);
