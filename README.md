@@ -57,11 +57,6 @@
  - $ `a2enmod ssl`
  - $ `servive apache2 restart`
 
- - > Start Crypto Setup
-   - $ `openssl genrsa -out priv.pem 4096`
-   - $ `openssl rsa -pubout -in priv.pem -out pub.pem`
-   - $ `mkdir -p /var/www/html/downloads`
-   - $ `cp pub.pem /var/www/html/downloads/`
  - > Modify crypto.sh and replace the IP with your web server's IP/URL
    - $ `sed -i 's/192\.168\.1\.132/YYY\.YYY\.YYY\.YYY/g' crypto.sh` # Where YYY.YYY.YYY.YYY is your IP
  - > OR
