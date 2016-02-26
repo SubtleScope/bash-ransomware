@@ -75,6 +75,20 @@
    - $ `create table target_list (id int(6) unsigned auto_increment primary key, unique_id varchar(16) not null, target_ip varchar(30), file_count int not null, curr_time timestamp not null, exp_time timestamp not null, time_expired bool not null, paid bool not null, paid_count timestamp not null);`
    - $ `exit`
 
+## Bitcoin Exchange
+ - This feature was added to add a dimension of realism to this project. This feature allows the user to visit our exchange in order to obtain a working bitcoin transaction id that will be accepted by the payment page
+ - Previously, the payment page accepted any 64 character string (length of a Bitcoin transaction id)
+ - Users have to find a way to obtain the required amount of bitcoin for their payment (either 2 or 5 BTC)
+ - These files can either be added to the same host or to another host
+ - Directions:
+   - Mysql:
+   - `mysql -u [user] -p`
+   - `create database exchange`
+   - `create table users (id int(6) unsigned auto_increment primary key, username varchar(16) not null, password varchar(32) not null);`
+   - `exit`
+   - Web pages:
+     - `cp -R exchange/ /var/www/html`
+
 ## What to do on the client-side
  - Get target to download the file and execute or if you have have access to the system, download it directly
  - $ `chmod 755 crypto.sh`
