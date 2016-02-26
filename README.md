@@ -88,6 +88,7 @@
    - `exit`
    - Web pages:
      - `cp -R exchange/ /var/www/html`
+ - Note: You must use this in order to get a transaction id that will be accepted by the payment page
 
 ## What to do on the client-side
  - Get target to download the file and execute or if you have have access to the system, download it directly
@@ -148,3 +149,12 @@
    ![AfterPayment1](/screenshots/Decryption_After_Payment_1.jpg?raw=true "AfterPayment1") <br />
    - After Payment (Downloads Available): <br />
    ![AfterPayment2](/screenshots/Decryption_After_Payment_2.jpg?raw=true "AfterPayment2") <br />
+
+   - Exchange List: <br />
+   ![ExchangeList](/screenshots/Exchanges.jpg?raw=true "ExchangeList") <br />
+   - Exchange Login: <br />
+   ![ExchangeLogin](/screenshots/ExchangeLogin.jpg?raw=true "ExchangeLogin") <br />
+   - Exchange Logged In: <br />
+   ![ExchangeLoggedIn](/screenshots/LoggedIn.jpg?raw=true "ExchangeLoggedIn") <br />
+- Exchange Transaction ID: <br />
+   ![TransactionID](/screenshots/TransID.jpg?raw=true "TransactionID") <br />

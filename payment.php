@@ -245,17 +245,20 @@ if (isset($_GET['unique_id']) && !empty($_GET['unique_id'])) {
       <td align="left">
         <ul>
           <li>
-            <a href="http://localbitcoins.com">LocalBitcoins.com (WU)</a> - Buy Bitcoin with Western Union
+            <a href="/exchange/index.php">M4dH4t'z Exchange</a> - <b><font color="red">We now only accept Bitcoin from this Exchange!</font></b>
           </li>
           <li>
-            <a href="http://coincafe.com">CoinCafe.com</a> - <b>Recommended for fast, simple service. 
+            <!--<a href="http://localbitcoins.com">-->LocalBitcoins.com (WU)<!--</a>--> - Buy Bitcoin with Western Union
+          </li>
+          <li>
+            <!--<a href="http://coincafe.com">-->CoinCafe.com<!--</a>--> - <b>Recommended for fast, simple service. 
             <br />
             Payment methods: Western Union, Bank of America, Cash by FedEx, Moneygram, Money Order. 
             <br />
             In NYC: Bitcoin ATM, In Person</b>
           </li>
           <li>
-            <a href="http://btcdirect.eu">BTCDirect.eu</a> - The best place for EUROPE
+            <!--<a href="http://btcdirect.eu">-->BTCDirect.eu<!--</a>--> - The best place for EUROPE
           </li>
         </ul>
       </td>
