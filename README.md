@@ -156,5 +156,5 @@
    ![ExchangeLogin](/screenshots/ExchangeLogin.jpg?raw=true "ExchangeLogin") <br />
    - Exchange Logged In: <br />
    ![ExchangeLoggedIn](/screenshots/LoggedIn.jpg?raw=true "ExchangeLoggedIn") <br />
-- Exchange Transaction ID: <br />
+   - Exchange Transaction ID: <br />
    ![TransactionID](/screenshots/TransID.jpg?raw=true "TransactionID") <br />
