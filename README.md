@@ -48,7 +48,7 @@
  - $ `openssl req -new -key server.key -out server.csr`
  - $ `openssl x509 -req -days 4096 -in server.csr  -signkey server.key -out server.crt`
  - $ `chmod 600 server.*`
- - $ `mkdir /etc/ssl/certs/`
+ - $ `mkdir -p /etc/ssl/certs/`
  - $ `mv server.key /etc/ssl/certs/`
  - $ `mv server.crt /etc/ssl/certs/`
  - > Use the sample apache SSL and Default configurations in sample_apache_conf as a guide
